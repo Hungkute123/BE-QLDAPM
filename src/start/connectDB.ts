@@ -3,11 +3,11 @@ import config from '../config/config';
 import util from 'util';
 
 const pool = mysql.createPool({
-	host: config.mysql.host,
-	port: config.mysql.port,
-	user: config.mysql.user,
-	password: config.mysql.pass,
-	database: config.mysql.database,
+	host: 'bdhn4xe1fix9g6um2hq3-mysql.services.clever-cloud.com',
+	port: 3306,
+	user: 'ua5dri4tfszx50b6',
+	password: 'Dk7UU8IcNmzG0lk1ON2l',
+	database: 'bdhn4xe1fix9g6um2hq3',
 	connectionLimit: 50,
 });
 
