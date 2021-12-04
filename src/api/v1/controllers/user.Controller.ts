@@ -113,7 +113,9 @@ class UserController {
 	});
 
 	getInfo = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		res.status(200).json({ data: res.locals.data, message: 'Info' });
+		const data = await userService.getUserByEmail(res.locals.email);
+
+		res.status(200).json({ data });
 	});
 }
 
