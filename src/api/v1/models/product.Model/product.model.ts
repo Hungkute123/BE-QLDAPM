@@ -1,3 +1,4 @@
+import internal from 'stream';
 import { TBL_BOOKS, TBL_ITEMS, TBL_PRODUCTS, TBL_FAVORITE } from '../../../../constants/tables';
 import { database } from '../../../../start/connectDB';
 
@@ -226,6 +227,23 @@ class ProductsModel {
 
 		return rows;
 	}
+	async getProductsByIDUser(IDUser: number) {
+		const rows = await database.load(
+			`select * from ${TBL_PRODUCTS} where IDUser = ${IDUser}`
+		);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+	async addNewProduct(Product: any) {
+		return database.add(Product, TBL_PRODUCTS);
+	}
+	async addDetailBook(Book: any){
+		return database.add(Book, TBL_BOOKS);
+	}
+	async addDetailItem(Item: any){
+		return database.add(Item, TBL_ITEMS);
+	}
 }
 export const productsModel = new ProductsModel();
-

@@ -5,4 +5,4 @@ export const TBL_CATEGORYPRODUCT: string = 'categoryproduct';
 export const TBL_FAVORITE: string = 'favorite';
 export const TBL_USER:string = 'user';
 export const TBL_OTP:string = 'otp';
-
+export const TBL_DISCOUNT:string = 'discount';

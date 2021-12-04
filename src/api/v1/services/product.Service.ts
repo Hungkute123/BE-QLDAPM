@@ -205,6 +205,61 @@ class ProductService {
 			throw new Error(error.messages);
 		}
 	};
+	getProductsByIDUser = async (IDUser: number) => {
+		try {
+			const products = await productsModel.getProductsByIDUser(IDUser);
+			if (products === null) {
+				return {
+					data: null,
+					message: 'can not find products',
+					status: 400,
+				};
+			}
+			return {
+				data: products,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	addNewProduct = async (Product: any) => {
+		try {
+			await productsModel.addNewProduct(Product);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	addDetailBook = async (Book: any) => {
+		try {
+			await productsModel.addDetailBook(Book);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	addDetailItem = async (Item: any) => {
+		try {
+			await productsModel.addDetailItem(Item);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 
 export const productService = new ProductService();
