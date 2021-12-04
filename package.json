@@ -5,9 +5,11 @@
   "main": "./src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && SET NODE_ENV=production && node ./build/index.js",
+    "start": "SET NODE_ENV=production && node ./build/index.js",
     "build": "tsc -p .",
-    "dev": "SET NODE_ENV=development&& nodemon ./src/index.ts"
+    "dev": "SET NODE_ENV=development&& nodemon ./src/index.ts",
+    "heroku-prebuild": "npm i -f",
+    "heroku-postbuild": "npm run build"
   },
   "keywords": [
     "express",
