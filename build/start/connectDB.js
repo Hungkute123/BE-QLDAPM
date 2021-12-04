@@ -34,21 +34,21 @@ var Database = /** @class */ (function () {
     };
     Database.prototype.add = function (entity, tableName) {
         var query = {
-            sql: "insert into " + tableName + " set ?",
+            sql: "insert into ".concat(tableName, " set ?"),
             values: [entity]
         };
         return pool_query(query);
     };
     Database.prototype.del = function (condition, tableName) {
         var query = {
-            sql: "delete from " + tableName + " where ?",
+            sql: "delete from ".concat(tableName, " where ?"),
             values: [condition]
         };
         return pool_query(query);
     };
     Database.prototype.patch = function (entity, condition, tableName) {
         var query = {
-            sql: "update " + tableName + " set ? where ?",
+            sql: "update ".concat(tableName, " set ? where ?"),
             values: [entity, condition]
         };
         return pool_query(query);

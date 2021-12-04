@@ -46,7 +46,7 @@ var ProductsModel = /** @class */ (function () {
     ProductsModel.prototype.all = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS)];
+                return [2 /*return*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS))];
             });
         });
     };
@@ -55,7 +55,7 @@ var ProductsModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + " where IDCategory = " + IDCategory + " limit " + limit)];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, " where IDCategory = ").concat(IDCategory, " limit ").concat(limit))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -70,7 +70,7 @@ var ProductsModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + " where IDCategory = " + IDCategory)];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, " where IDCategory = ").concat(IDCategory))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -86,7 +86,7 @@ var ProductsModel = /** @class */ (function () {
             var rows, data;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + " where IDProduct = '" + IDProduct + "'")];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, " where IDProduct = '").concat(IDProduct, "'"))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0) {
@@ -95,10 +95,10 @@ var ProductsModel = /** @class */ (function () {
                         else {
                             data = void 0;
                             if (rows[0].TypeProduct === 'Book') {
-                                data = connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + " pd join " + tables_1.TBL_BOOKS + " bk on pd.IDProduct = bk.IDProduct where pd.IDProduct = '" + IDProduct + "'");
+                                data = connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, " pd join ").concat(tables_1.TBL_BOOKS, " bk on pd.IDProduct = bk.IDProduct where pd.IDProduct = '").concat(IDProduct, "'"));
                             }
                             else {
-                                data = connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + " pd join " + tables_1.TBL_ITEMS + " bk on pd.IDProduct = bk.IDProduct where pd.IDProduct = '" + IDProduct + "'");
+                                data = connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, " pd join ").concat(tables_1.TBL_ITEMS, " bk on pd.IDProduct = bk.IDProduct where pd.IDProduct = '").concat(IDProduct, "'"));
                             }
                             return [2 /*return*/, data];
                         }
@@ -116,34 +116,34 @@ var ProductsModel = /** @class */ (function () {
                         sql = "";
                         whereCondition = "";
                         if (search) {
-                            whereCondition += "where match(NameProduct) against('" + search + "')";
+                            whereCondition += "where match(NameProduct) against('".concat(search, "')");
                         }
                         if (price) {
                             index = price.indexOf('and');
                             if (index > 0) {
                                 if (whereCondition)
-                                    whereCondition += " and Price between " + price;
+                                    whereCondition += " and Price between ".concat(price);
                                 else
-                                    whereCondition += "where Price between " + price;
+                                    whereCondition += "where Price between ".concat(price);
                             }
                             else {
                                 if (whereCondition)
-                                    whereCondition += " and Price " + price;
+                                    whereCondition += " and Price ".concat(price);
                                 else
-                                    whereCondition += "where Price " + price;
+                                    whereCondition += "where Price ".concat(price);
                             }
                         }
                         if (typeproduct) {
                             if (whereCondition)
-                                whereCondition += " and TypeProduct = '" + typeproduct + "'";
+                                whereCondition += " and TypeProduct = '".concat(typeproduct, "'");
                             else
-                                whereCondition += "where TypeProduct = '" + typeproduct + "'";
+                                whereCondition += "where TypeProduct = '".concat(typeproduct, "'");
                         }
                         if (votes) {
                             if (whereCondition)
-                                whereCondition += " and Votes = " + votes;
+                                whereCondition += " and Votes = ".concat(votes);
                             else
-                                whereCondition += "where Votes = " + votes + "'";
+                                whereCondition += "where Votes = ".concat(votes, "'");
                         }
                         switch (sort) {
                             case 'Bán Chạy Tuần':
@@ -165,7 +165,7 @@ var ProductsModel = /** @class */ (function () {
                             case 'Mới Nhất':
                                 break;
                             default:
-                                sql = "select *\n\t\t\t\t\tfrom (\n\t\t\t\t\tselect * \n\t\t\t\t\tfrom " + tables_1.TBL_PRODUCTS + "\n\t\t\t\t\t" + whereCondition + "\n\t\t\t\t\torder by " + order + " " + ordervalue + "\n\t\t\t\t\tlimit " + limit + "\n\t\t\t\t\toffset " + offset + "\n\t\t\t\t   ) as p\n\t\t\t\t   ";
+                                sql = "select *\n\t\t\t\t\tfrom (\n\t\t\t\t\tselect * \n\t\t\t\t\tfrom ".concat(tables_1.TBL_PRODUCTS, "\n\t\t\t\t\t").concat(whereCondition, "\n\t\t\t\t\torder by ").concat(order, " ").concat(ordervalue, "\n\t\t\t\t\tlimit ").concat(limit, "\n\t\t\t\t\toffset ").concat(offset, "\n\t\t\t\t   ) as p\n\t\t\t\t   ");
                                 break;
                         }
                         console.log('mysql', sql);
@@ -189,34 +189,34 @@ var ProductsModel = /** @class */ (function () {
                         sql = "";
                         whereCondition = "";
                         if (search) {
-                            whereCondition += "where match(NameProduct) against('" + search + "')";
+                            whereCondition += "where match(NameProduct) against('".concat(search, "')");
                         }
                         if (price) {
                             index = price.indexOf('and');
                             if (index > 0) {
                                 if (whereCondition)
-                                    whereCondition += " and Price between " + price;
+                                    whereCondition += " and Price between ".concat(price);
                                 else
-                                    whereCondition += "where Price between " + price;
+                                    whereCondition += "where Price between ".concat(price);
                             }
                             else {
                                 if (whereCondition)
-                                    whereCondition += " and Price " + price;
+                                    whereCondition += " and Price ".concat(price);
                                 else
-                                    whereCondition += "where Price " + price;
+                                    whereCondition += "where Price ".concat(price);
                             }
                         }
                         if (typeproduct) {
                             if (whereCondition)
-                                whereCondition += " and TypeProduct = '" + typeproduct + "'";
+                                whereCondition += " and TypeProduct = '".concat(typeproduct, "'");
                             else
-                                whereCondition += "where TypeProduct = '" + typeproduct + "'";
+                                whereCondition += "where TypeProduct = '".concat(typeproduct, "'");
                         }
                         if (votes) {
                             if (whereCondition)
-                                whereCondition += " and Votes = " + votes;
+                                whereCondition += " and Votes = ".concat(votes);
                             else
-                                whereCondition += "where Votes = " + votes + "'";
+                                whereCondition += "where Votes = ".concat(votes, "'");
                         }
                         switch (sort) {
                             case 'Bán Chạy Tuần':
@@ -238,7 +238,7 @@ var ProductsModel = /** @class */ (function () {
                             case 'Mới Nhất':
                                 break;
                             default:
-                                sql = "select *\n                    from (\n                    select * \n                    from " + tables_1.TBL_PRODUCTS + "\n                    " + whereCondition + "\n                   ) as p\n                   ";
+                                sql = "select *\n                    from (\n                    select * \n                    from ".concat(tables_1.TBL_PRODUCTS, "\n                    ").concat(whereCondition, "\n                   ) as p\n                   ");
                                 break;
                         }
                         return [4 /*yield*/, connectDB_1.database.load(sql)];
@@ -256,7 +256,7 @@ var ProductsModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + "\n\t\t\torder by View desc \n\t\t\tlimit " + limit)];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, "\n\t\t\torder by View desc \n\t\t\tlimit ").concat(limit))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -271,7 +271,7 @@ var ProductsModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + "\n\t\t\twhere IDCategory = " + IDCategory + "\n\t\t\torder by Votes desc \n\t\t\tlimit " + limit)];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, "\n\t\t\twhere IDCategory = ").concat(IDCategory, "\n\t\t\torder by Votes desc \n\t\t\tlimit ").concat(limit))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -287,7 +287,7 @@ var ProductsModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + " as a join " + tables_1.TBL_FAVORITE + " as b ON a.IDProduct = b.IDProduct\n\t\t\twhere IDUser = " + IDUser)];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, " as a join ").concat(tables_1.TBL_FAVORITE, " as b ON a.IDProduct = b.IDProduct\n\t\t\twhere IDUser = ").concat(IDUser))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -302,7 +302,7 @@ var ProductsModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_PRODUCTS + " where IDUser = " + IDUser)];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_PRODUCTS, " where IDUser = ").concat(IDUser))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)

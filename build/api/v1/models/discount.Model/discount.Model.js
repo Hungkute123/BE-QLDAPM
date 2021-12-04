@@ -54,7 +54,7 @@ var DiscountModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_DISCOUNT + " where IDProduct = '" + IDProduct + "'")];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_DISCOUNT, " where IDProduct = '").concat(IDProduct, "'"))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)

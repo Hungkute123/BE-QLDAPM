@@ -48,7 +48,7 @@ var UserModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_USER + " where PhoneNumber = \"" + PhoneNumber + "\"")];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_USER, " where PhoneNumber = \"").concat(PhoneNumber, "\""))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -63,7 +63,7 @@ var UserModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select IDUser, FirstName, LastName, Email, DateOfBirth, Gender, TypeOfUser, Active from " + tables_1.TBL_USER + " where Email = \"" + Email + "\"")];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select IDUser, FirstName, LastName, Email, DateOfBirth, Gender, TypeOfUser, Active from ".concat(tables_1.TBL_USER, " where Email = \"").concat(Email, "\""))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -78,7 +78,7 @@ var UserModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select Password from " + tables_1.TBL_USER + " where Email = \"" + Email + "\"")];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select Password from ".concat(tables_1.TBL_USER, " where Email = \"").concat(Email, "\""))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)
@@ -97,7 +97,7 @@ var UserModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_OTP + " where Email = \"" + Email + "\"")];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_OTP, " where Email = \"").concat(Email, "\""))];
                     case 1:
                         rows = _a.sent();
                         if (rows.length != 0) {

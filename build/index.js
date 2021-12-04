@@ -34,5 +34,5 @@ app.use(express_1.default.static(path_1.default.join(__dirname, 'assets')));
 // listen on port: default port = 5000
 var PORT = parseInt(process.env.PORT, 10) || 5000;
 app.listen(PORT, function () {
-    console.log("http://localhost:" + PORT);
+    console.log("http://localhost:".concat(PORT));
 });
