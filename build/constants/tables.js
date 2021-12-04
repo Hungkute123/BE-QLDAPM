@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TBL_DISCOUNT = exports.TBL_OTP = exports.TBL_USER = exports.TBL_FAVORITE = exports.TBL_CATEGORYPRODUCT = exports.TBL_BOOKS = exports.TBL_ITEMS = exports.TBL_PRODUCTS = void 0;
+exports.TBL_PRODUCTS = 'product';
+exports.TBL_ITEMS = 'item';
+exports.TBL_BOOKS = 'book';
+exports.TBL_CATEGORYPRODUCT = 'categoryproduct';
+exports.TBL_FAVORITE = 'favorite';
+exports.TBL_USER = 'user';
+exports.TBL_OTP = 'otp';
+exports.TBL_DISCOUNT = 'discount';

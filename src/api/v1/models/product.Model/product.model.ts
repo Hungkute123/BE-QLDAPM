@@ -229,7 +229,7 @@ class ProductsModel {
 	}
 	async getProductsByIDUser(IDUser: number) {
 		const rows = await database.load(
-			`select * from ${TBL_PRODUCTS} where IDShop = ${IDUser}`
+			`select * from ${TBL_PRODUCTS} where IDUser = ${IDUser}`
 		);
 
 		if (rows.length === 0) return null;
