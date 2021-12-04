@@ -45,7 +45,10 @@ var DiscountModel = /** @class */ (function () {
     DiscountModel.prototype.getDiscountByIDUser = function (IDUser) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/];
+                // const rows = await database.load(`select * from ${TBL_DISCOUNT} where IDProduct = '${IDProduct}'`);
+                // if (rows.length === 0 ) return null;
+                // return rows;
+                return [2 /*return*/, 0];
             });
         });
     };
@@ -54,7 +57,7 @@ var DiscountModel = /** @class */ (function () {
             var rows;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from ".concat(tables_1.TBL_DISCOUNT, " where IDProduct = '").concat(IDProduct, "'"))];
+                    case 0: return [4 /*yield*/, connectDB_1.database.load("select * from " + tables_1.TBL_DISCOUNT + " where IDProduct = '" + IDProduct + "'")];
                     case 1:
                         rows = _a.sent();
                         if (rows.length === 0)

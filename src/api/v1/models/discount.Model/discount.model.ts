@@ -8,6 +8,7 @@ class DiscountModel {
 		// if (rows.length === 0 ) return null;
 
 		// return rows;
+		return 0;
 	}
 	async getDiscountByIDProduct(IDProduct: string) {
 		const rows = await database.load(`select * from ${TBL_DISCOUNT} where IDProduct = '${IDProduct}'`);
