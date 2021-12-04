@@ -33,7 +33,7 @@ class UserController {
 		if (ret) {
 			const data = await userService.getUserByEmail(email);
 			const accessToken = jwt.sign({ ...data }, process.env.ACCESS_TOKEN_SECRET as string, {
-				expiresIn: '300s',
+				expiresIn: process.env.TIMERESET,
 			});
 
 			res.json({ data: accessToken, message: 'Login success', Path });
