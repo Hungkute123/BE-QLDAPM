@@ -2,7 +2,7 @@ FROM node:lts-alpine
 
 # Working in root app
 WORKDIR /usr/src/app
-COPY package.json package-lock.json tsconfig.json ./
+COPY package.json package-lock.json tsconfig.json db_fahasa.sql jest.config.js server.http ./
 COPY src src
 RUN npm config set unsafe-perm true
 RUN npm install
