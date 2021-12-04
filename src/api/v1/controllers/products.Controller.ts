@@ -187,6 +187,7 @@ class ProductsController {
 					SubImageTwo: ImageTwo,
 					SubImageThree: ImageThree,
 					Price: req.body.product_price,
+					Discount: req.body.product_discount,
 					Weight: req.body.product_weight,
 					PackagingSize: req.body.product_package_size,
 					Description: req.body.description,
