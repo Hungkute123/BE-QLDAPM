@@ -15,6 +15,11 @@ import { categoryController } from '../../controllers/category.Controller';
 categoryRouter.get('/level', categoryController.getCategoryProductByLevel);
 categoryRouter.get('/idparent', categoryController.getCategoryProductByIDParent);
 categoryRouter.get('/idparent-limit', categoryController.getCategoryProductByIDParentwithSetLimit);
+categoryRouter.get('/get-one-cate', categoryController.getOneCategory);
+categoryRouter.post('/update-cate', categoryController.updateOneCategory);
+categoryRouter.post('/delete-cate', categoryController.deleteOneCategory);
+categoryRouter.post('/add-cate', categoryController.addOneCategory);
+
 //--------------------------------------------POST-----------------------------------------
 
 //--------------------------------------------PUT------------------------------------------

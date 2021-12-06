@@ -43,6 +43,38 @@ class CategoryController {
 			res.status(status).send({ data, message });
 		}
 	);
+
+	getOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const IDCategory = Number(query.IDCategory);
+
+		if(!IDCategory)  res.status(200).send('error');
+		const { data, message, status } = await categoryServices.getOneCategory(IDCategory);
+
+		res.status(status).send({ data, message });
+	});
+
+	updateOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { IDCategory, Name, IDParent, Level } = req.body;
+		const category = { IDCategory, Name, IDParent, Level };
+		const { data, message, status } = await categoryServices.updateOneCategory(category);
+
+		res.status(status).send({ data, message });
+	});
+
+	deleteOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { IDCategory } = req.body;
+		const { data, message, status } = await categoryServices.deleteOneCategory(IDCategory);
+
+		res.status(status).send({ data, message });
+	});
+
+	addOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { IDCategory } = req.body;
+		const { data, message, status } = await categoryServices.addOneCategory(IDCategory);
+
+		res.status(status).send({ data, message });
+	});
 }
 export const categoryController = new CategoryController();
 

@@ -14,9 +14,11 @@ import { userController } from './../../controllers/user.Controller';
 userRouter.get('/login', userController.login);
 userRouter.get('/send-otp', userController.sendOTP);
 userRouter.get('/get-info', authenTokenMiddleware, userController.getInfo);
+userRouter.get('/get-all-user', userController.getAllUser);
 
 //--------------------------------------------POST-----------------------------------------
 userRouter.get('/register', userController.register);
+userRouter.get('/active-user', userController.activeUser);
 
 //--------------------------------------------PUT------------------------------------------
 
