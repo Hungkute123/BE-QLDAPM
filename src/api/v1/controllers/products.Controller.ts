@@ -132,13 +132,15 @@ class ProductsController {
 		res.status(status).send({ data, message, Path });
 	});
 	getProductsByIDUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const { data, message, status } = await productService.getProductsByIDUser(1);
+		const IDUser = Number(req.query.IDUser);
+		console.log(req.query)
+		const { data, message, status } = await productService.getProductsByIDUser(IDUser);
 		res.status(status).send({ data, message});
 	});
 	addNewProduct = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const storage = multer.diskStorage({
 			destination: function (req, file, cb) {
-				cb(null, './src/assets/images/product');
+				cb(null, './src/assets/images/products');
 			},
 			filename: function (req, file, cb) {
 				cb(null, Date.now() + '_' + file.originalname);
@@ -178,7 +180,7 @@ class ProductsController {
 				}
 				const product = {
 					IDProduct: String(Date.now()) + String(id),
-					IDUser: 1,
+					IDUser: Number(req.body.id_user),
 					IDCategory: Number(req.body.id_category),
 					TypeProduct: req.body.type_product,
 					NameProduct: req.body.product_name,
@@ -187,11 +189,11 @@ class ProductsController {
 					SubImageTwo: ImageTwo,
 					SubImageThree: ImageThree,
 					Price: req.body.product_price,
-					Discount: req.body.product_discount,
 					Weight: req.body.product_weight,
 					PackagingSize: req.body.product_package_size,
 					Description: req.body.description,
 					Quantity: Number(req.body.product_quantity),
+					Discount: Number(req.body.product_discount),
 					Status: Number(req.body.status),
 				};
 				const { data, message, status } = await productService.addNewProduct(product);
