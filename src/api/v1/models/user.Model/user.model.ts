@@ -13,6 +13,16 @@ class UserModel {
 		return rows[0];
 	}
 
+	async getAllUser() {
+		const rows = await database.load(
+			`select * from ${TBL_USER}`
+		);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+
 	async getUserByEmail(Email: string) {
 		const rows = await database.load(
 			`select IDUser, FirstName, LastName, Email, DateOfBirth, Gender, TypeOfUser, Active from ${TBL_USER} where Email = "${Email}"`
@@ -51,6 +61,12 @@ class UserModel {
 		return database.patch(User, IDUser, TBL_USER);
 	}
 
+	activeUser(active: number, IDUser: number) {
+		const entity = {Active: !active}
+		const condition = {IDUser: IDUser}
+		
+		return database.patch(entity, condition, TBL_USER);
+	}
 	// Delete Data
 }
 
