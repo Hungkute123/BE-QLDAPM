@@ -47,11 +47,14 @@ class CategoryModel {
 	}
 
 	async updateOneCategory(category: any) {
-		return database.patch(category, category.IDCategory, TBL_CATEGORYPRODUCT);
+		const condition = { IDCategory: category.IDCategory };
+		delete category.IDCategory;
+		return database.patch(category, condition, TBL_CATEGORYPRODUCT);
 	}
 
-	async deleteOneCategory(IDCategory: number) {
-		return database.del(IDCategory, TBL_CATEGORYPRODUCT);
+	async deleteOneCategory(IDCategory: number) {		
+		const condition = {IDCategory: IDCategory}
+		return database.del(condition, TBL_CATEGORYPRODUCT);
 	}
 
 	async addOneCategory(category: any) {
