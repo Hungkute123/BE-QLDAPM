@@ -33,7 +33,7 @@ class UserController {
 		if (ret) {
 			const data = await userService.getUserByEmail(email);
 			const accessToken = jwt.sign({ ...data }, process.env.ACCESS_TOKEN_SECRET as string, {
-				expiresIn: '30000s',
+				expiresIn: process.env.TIMERESET,
 			});
 
 			res.json({ data: accessToken, message: 'Login success', Path });
@@ -113,7 +113,9 @@ class UserController {
 	});
 
 	getInfo = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		res.status(200).json({ data: res.locals.data, message: 'Info' });
+		const data = await userService.getUserByEmail(res.locals.email);
+
+		res.status(200).json({ data });
 	});
 
 	getAllUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
