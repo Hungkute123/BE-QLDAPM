@@ -15,6 +15,8 @@ userRouter.get('/login', userController.login);
 userRouter.get('/send-otp', userController.sendOTP);
 userRouter.get('/get-info', authenTokenMiddleware, userController.getInfo);
 userRouter.get('/get-information-vat', authenTokenMiddleware, userController.getInformationVAT);
+userRouter.get('/get-all-user', userController.getAllUser);
+userRouter.get('/active-user', userController.activeUser);
 
 //--------------------------------------------POST-----------------------------------------
 userRouter.get('/register', userController.register);

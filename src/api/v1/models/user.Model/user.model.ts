@@ -1,4 +1,9 @@
-import { TBL_USER, TBL_OTP, TBL_INFORMATION_VAT, TBL_USER_ADDRESS } from '../../../../constants/tables';
+import {
+	TBL_USER,
+	TBL_OTP,
+	TBL_INFORMATION_VAT,
+	TBL_USER_ADDRESS,
+} from '../../../../constants/tables';
 import { database } from '../../../../start/connectDB';
 
 class UserModel {
@@ -21,8 +26,18 @@ class UserModel {
 		return rows[0];
 	}
 
+	async getAllUser() {
+		const rows = await database.load(`select * from ${TBL_USER}`);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+
 	async getInformationVAT(IDUser: number) {
-		const rows = await database.load(`select * from ${TBL_INFORMATION_VAT} where IDUser = ${IDUser}`);
+		const rows = await database.load(
+			`select * from ${TBL_INFORMATION_VAT} where IDUser = ${IDUser}`
+		);
 
 		if (rows.length === 0) return null;
 
@@ -58,7 +73,7 @@ class UserModel {
 
 	async addAddress(address: Object) {
 		return database.add(address, TBL_USER_ADDRESS);
-	};
+	}
 
 	// Edit Date
 	updateUser(User: Object, IDUser: Object) {
@@ -67,8 +82,14 @@ class UserModel {
 
 	updateAddress(address: Object, IDUser: Object) {
 		return database.patch(address, IDUser, TBL_USER_ADDRESS);
-	};
+	}
 
+	activeUser(active: number, IDUser: number) {
+		const entity = { Active: !active };
+		const condition = { IDUser: IDUser };
+
+		return database.patch(entity, condition, TBL_USER);
+	}
 	// Delete Data
 }
 
