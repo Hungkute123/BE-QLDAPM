@@ -61,5 +61,85 @@ class CategoryServices {
 			throw new Error(error.messages);
 		}
 	};
+
+	getOneCategory = async (IDCategory: number) => {
+		try {
+			const category = await categoryModel.getOneCategory(IDCategory)
+			if (category === null) {
+				return {
+					data: null,
+					message: 'can not find categories',
+					status: 400,
+				};
+			}
+			return {
+				data: category,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+
+	updateOneCategory = async (category: any) => {
+		try {
+			await categoryModel.updateOneCategory(category)
+			if (category === null) {
+				return {
+					data: null,
+					message: 'can not find categories',
+					status: 400,
+				};
+			}
+			return {
+				data: category,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+
+	deleteOneCategory = async (IDCategory: number) => {
+		try {
+			await categoryModel.deleteOneCategory(IDCategory)
+			if (IDCategory === null) {
+				return {
+					data: null,
+					message: 'can not find categories',
+					status: 400,
+				};
+			}
+			return {
+				data: IDCategory,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+
+	addOneCategory = async (category: any) => {
+		try {
+			await categoryModel.addOneCategory(category)
+			if (category === null) {
+				return {
+					data: null,
+					message: 'can not find categories',
+					status: 400,
+				};
+			}
+			return {
+				data: category,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 export const categoryServices = new CategoryServices()

@@ -117,6 +117,36 @@ class UserController {
 
 		res.status(200).json({ data });
 	});
+
+	getAllUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const data = await userService.getAllUser();
+
+		if(!data) {
+			res.status(200).json({data: [], message: 'Info'});
+		}
+		else res.status(200).json({data: data.map((item: any) => {
+			return {
+				userid: item.IDUser,
+				active: item.Active,
+				email: item.Email,
+				firstname: item.FirstName,
+				lastname: item.LastName,
+				phonenumber: item.PhoneNumber,
+				typeofuser: item.TypeOfUser
+			}
+		}), message: 'Info'});
+	});
+
+	activeUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const {active, userid} = req.query;
+		console.log('active,', active);
+		
+		if(active != undefined && userid) {
+			const data = await userService.activeUser(Number(active), Number(userid))
+		}
+	
+		res.status(200).json({data: userid, message: 'Info'});
+	});
 }
 
 export const userController = new UserController();
