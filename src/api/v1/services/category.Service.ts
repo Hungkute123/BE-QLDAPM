@@ -61,5 +61,24 @@ class CategoryServices {
 			throw new Error(error.messages);
 		}
 	};
+	getDetailCategoryByID = async (IDCategory: number) => {
+		try {
+			const categories = await categoryModel.getDetailCategoryByID(IDCategory)
+			if (categories === null) {
+				return {
+					data: null,
+					message: 'can not find categories',
+					status: 400,
+				};
+			}
+			return {
+				data: categories,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 export const categoryServices = new CategoryServices()

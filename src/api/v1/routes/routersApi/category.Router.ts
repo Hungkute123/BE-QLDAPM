@@ -15,6 +15,7 @@ import { categoryController } from '../../controllers/category.Controller';
 categoryRouter.get('/level', categoryController.getCategoryProductByLevel);
 categoryRouter.get('/idparent', categoryController.getCategoryProductByIDParent);
 categoryRouter.get('/idparent-limit', categoryController.getCategoryProductByIDParentwithSetLimit);
+categoryRouter.get('/idcategory',categoryController.getDetailCategoryByID);
 //--------------------------------------------POST-----------------------------------------
 
 //--------------------------------------------PUT------------------------------------------
