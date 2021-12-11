@@ -14,11 +14,16 @@ import { userController } from './../../controllers/user.Controller';
 userRouter.get('/login', userController.login);
 userRouter.get('/send-otp', userController.sendOTP);
 userRouter.get('/get-info', authenTokenMiddleware, userController.getInfo);
+userRouter.get('/get-information-vat', authenTokenMiddleware, userController.getInformationVAT);
 
 //--------------------------------------------POST-----------------------------------------
 userRouter.get('/register', userController.register);
+userRouter.post('/add-information-vat', authenTokenMiddleware, userController.addInformationVAT);
+userRouter.post('/add-user-address', authenTokenMiddleware, userController.addUserAddress);
 
-//--------------------------------------------PUT------------------------------------------
+//--------------------------------------------PATCH------------------------------------------
+userRouter.patch('/update-info', authenTokenMiddleware, userController.updateInfo);
+userRouter.patch('/update-user-address', authenTokenMiddleware, userController.updateUserAddress);
 
 //--------------------------------------------DELETE----------------------------------------
 

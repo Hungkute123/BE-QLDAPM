@@ -42,25 +42,6 @@ class UserController {
 		}
 	});
 
-	register = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const query = req.query;
-		const email = String(query.email);
-		const pass = String(query.pass) || '';
-		const Path = process.env.PATH_API;
-		const passCover = bcrypt.hashSync(pass, Number(process.env.ROUNDS));
-
-		const user = {
-			Email: email,
-			Password: passCover,
-			Active: 1,
-			TypeOfUser: 0,
-		};
-
-		const { data, message, status } = await userService.registerUser(user);
-
-		res.status(status).json({ data, message });
-	});
-
 	sendOTP = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const query = req.query;
 		const email = String(query.email);
@@ -116,6 +97,118 @@ class UserController {
 		const data = await userService.getUserByEmail(res.locals.email);
 
 		res.status(200).json({ data });
+	});
+
+	getInformationVAT = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const data = await userService.getInformationVAT(res.locals.idUser);
+
+		res.status(200).json({ data });
+	});
+
+	//--------------------------------------------POST-----------------------------------------
+	register = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const email = String(query.email);
+		const pass = String(query.pass) || '';
+		const Path = process.env.PATH_API;
+		const passCover = bcrypt.hashSync(pass, Number(process.env.ROUNDS));
+
+		const user = {
+			Email: email,
+			Password: passCover,
+			Active: 1,
+			TypeOfUser: 0,
+		};
+
+		const { data, message, status } = await userService.registerUser(user);
+
+		res.status(status).json({ data, message });
+	});
+
+	addInformationVAT = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const body = req.body;
+		const informationVAT = body.Information;
+
+		if (informationVAT.IDUser != res.locals.idUser) {
+			res.status(200).json({ data: false, message: 'Illegal access' });
+
+			return;
+		}
+
+		const { data, message, status } = await userService.addInformationVAT(
+			informationVAT,
+			informationVAT.IDUser
+		);
+
+		res.status(status).json({ data, message });
+	});
+
+	addUserAddress = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const body = req.body;
+		const address = body.Address;
+
+		if (address.IDUser != res.locals.idUser) {
+			res.status(200).json({ data: false, message: 'Illegal access' });
+
+			return;
+		}
+
+		const { data, message, status } = await userService.addUserAddress(address);
+
+		res.status(status).json({ data, message });
+	});
+
+	//--------------------------------------------PATCH------------------------------------------
+	updateInfo = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const body = req.body;
+		const infoUser = body.user;
+		const key = body.key;
+
+		if (infoUser.Email != res.locals.email) {
+			res.status(200).json({ data: false, message: 'Illegal access' });
+
+			return;
+		}
+
+		if (key.Password) {
+			const pass = await userService.getPassword(infoUser.Email);
+			const ret = bcrypt.compareSync(key.Password, pass.Password);
+
+			if (ret) {
+				const infoUserPass = {
+					...infoUser,
+					Password: bcrypt.hashSync(infoUser.Password, Number(process.env.ROUNDS)),
+				};
+				delete key.Password;
+				const { data, message, status } = await userService.updateUser(infoUserPass, key);
+
+				res.status(status).json({ data, message });
+			} else {
+				res.status(200).json({ data: false, message: 'Incorrect password' });
+			}
+
+			return;
+		}
+
+		const { data, message, status } = await userService.updateUser(infoUser, key);
+
+		res.status(status).json({ data, message });
+	});
+
+	updateUserAddress = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const body = req.body;
+		const address = body.Address;
+		const key = body.key;
+
+		if (key.IDUser != res.locals.idUser) {
+			res.status(200).json({ data: false, message: 'Illegal access' });
+
+			return;
+		}
+
+		const { data, message, status } = await userService.updateUserAddress(address, key);
+
+		res.status(status).json({ data, message });
 	});
 }
 

@@ -13,7 +13,7 @@ import { discountServices } from '../services/discount.Service';
 
 class DiscountController {
 	getDiscountByIDUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const IDUser: number = 1;
+		const IDUser: number = Number(req.query.IDUser);
 		const { data, message, status } = await discountServices.getDiscountByIDUser(IDUser);
 		res.status(status).send({ data, message });
 	});

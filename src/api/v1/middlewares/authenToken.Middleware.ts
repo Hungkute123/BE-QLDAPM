@@ -22,6 +22,7 @@ export function authenTokenMiddleware(req: Request, res: Response, next: NextFun
 			}
 
 			res.locals.email = data.Email;
+			res.locals.idUser = data.IDUser; 
 			res.locals.data = data;
 
 			next();
