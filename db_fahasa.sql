@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: db_fahasa
+-- Host: 127.0.0.1    Database: fahasa
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.22
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -129,6 +129,34 @@ INSERT INTO `favorite` VALUES ('1116090011532',1),('1400000099261-mau3',1),('188
 UNLOCK TABLES;
 
 --
+-- Table structure for table `information_vat`
+--
+
+DROP TABLE IF EXISTS `information_vat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `information_vat` (
+  `IDUser` int NOT NULL,
+  `Name` varchar(45) NOT NULL,
+  `CompanyName` varchar(45) NOT NULL,
+  `CompanyAddress` varchar(45) NOT NULL,
+  `CompanyCode` varchar(45) NOT NULL,
+  `CompanyEmail` varchar(45) NOT NULL,
+  PRIMARY KEY (`IDUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `information_vat`
+--
+
+LOCK TABLES `information_vat` WRITE;
+/*!40000 ALTER TABLE `information_vat` DISABLE KEYS */;
+INSERT INTO `information_vat` VALUES (15,'Nguyễn Hà Anh Kiểm','Bán code xuyên quốc gia','Ở đâu cũng được','B1234','contact.anhkiem@gmail.com');
+/*!40000 ALTER TABLE `information_vat` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `item`
 --
 
@@ -178,7 +206,7 @@ CREATE TABLE `otp` (
 
 LOCK TABLES `otp` WRITE;
 /*!40000 ALTER TABLE `otp` DISABLE KEYS */;
-INSERT INTO `otp` VALUES ('hung@gmail.com','D8Q94j'),('nguyendinhhung152@gmail.com','3gQhBq'),('nguyendinhhung298@gmail.com','zpMcus'),('nguyendinhhung2982000@gmail.com','TJf0wz'),('nguyenhaanhkiem@gmail.com','447nDu'),('thanhnhien152@gmail.com','zK7UM5');
+INSERT INTO `otp` VALUES ('hung@gmail.com','D8Q94j'),('nguyendinhhung152@gmail.com','3gQhBq'),('nguyendinhhung298@gmail.com','zpMcus'),('nguyendinhhung2982000@gmail.com','TJf0wz'),('nguyenhaanhkiem@gmail.com','e18Kdt'),('thanhnhien152@gmail.com','zK7UM5');
 /*!40000 ALTER TABLE `otp` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,12 +267,13 @@ CREATE TABLE `user` (
   `PhoneNumber` varchar(45) DEFAULT NULL,
   `Email` varchar(255) NOT NULL,
   `Password` varchar(255) DEFAULT NULL,
-  `DateOfBirth` date DEFAULT NULL,
+  `DateOfBirth` varchar(15) DEFAULT NULL,
   `Gender` varchar(45) DEFAULT NULL,
   `TypeOfUser` int NOT NULL,
   `Active` int NOT NULL,
+  `Vip` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`IDUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,8 +282,40 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (2,NULL,NULL,NULL,'satthuid@gmail.com','',NULL,NULL,0,0),(5,NULL,NULL,NULL,'nguyenhaanhkiem@gmail.com','$2b$10$zYCZjN33axja.HZ7bjiJ2eaAGGR9kGFWntAsLP8SOBH2YZeSj9Y0u',NULL,NULL,0,1),(6,NULL,NULL,NULL,'thanhnhien152@gmail.com','$2b$10$IgWjOSDiHf9JrtvqJ30uuuXxV24sXMut31ow.g7YRdWn7jAX3EBuO',NULL,NULL,0,1),(7,NULL,NULL,NULL,'nguyendinhhung2982000@gmail.com','$2b$10$IJgt8zFlMxcZHNXhiyyfxec10oD3RaMm1/JUDDE0v6LpeUBzVfG2e',NULL,NULL,0,1),(10,NULL,NULL,NULL,'nguyendinhhung152@gmail.com','$2b$10$GUU0GECV44OOwFHeRf8uOejEKrM7Q7y/KhFxzG7z07IEolBKBxwf.',NULL,NULL,0,1),(12,NULL,NULL,NULL,'nguyendinhhung298@gmail.com','$2b$10$yfZvR56oAjwes5N6lpO9r.7h7zdhGQxNEn.CQeg7.1H5EmDhNNJLi',NULL,NULL,0,1);
+INSERT INTO `user` VALUES (6,'Nguyen Ha Anh','Kiem','0123456789','thanhnhien152@gmail.com','$2b$10$IgWjOSDiHf9JrtvqJ30uuuXxV24sXMut31ow.g7YRdWn7jAX3EBuO','2000-01-07','Nam',0,1,'abcd'),(7,'Nguyen Ha Anh','Kiem','0123456789','nguyendinhhung2982000@gmail.com','$2b$10$IJgt8zFlMxcZHNXhiyyfxec10oD3RaMm1/JUDDE0v6LpeUBzVfG2e','2000-01-07','Nam',0,1,'abcd'),(10,'Nguyen Ha Anh','Kiem','0123456789','nguyendinhhung152@gmail.com','$2b$10$GUU0GECV44OOwFHeRf8uOejEKrM7Q7y/KhFxzG7z07IEolBKBxwf.','2000-01-07','Nam',0,1,'abcd'),(12,'Nguyen Ha Anh','Kiem','0123456789','nguyendinhhung298@gmail.com','$2b$10$yfZvR56oAjwes5N6lpO9r.7h7zdhGQxNEn.CQeg7.1H5EmDhNNJLi','2000-01-07','Nam',0,1,'abcd'),(15,'Nguyễn Hà Anh','Kiểm','0886703293','nguyenhaanhkiem@gmail.com','$2b$10$hTYnCcU/nZ1DpOCEsKHrYeZu4MIwEPCXqAH9HKiY5cIvP3TAX.ddG','2000-01-07','Nam',0,1,'Kiểm đẹp trai quá đi');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_address`
+--
+
+DROP TABLE IF EXISTS `user_address`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_address` (
+  `IDUser` int NOT NULL,
+  `FirstName` varchar(45) NOT NULL,
+  `LastName` varchar(45) NOT NULL,
+  `Phone` varchar(45) NOT NULL,
+  `Address` varchar(45) NOT NULL,
+  `City` varchar(25) NOT NULL,
+  `District` varchar(25) NOT NULL,
+  `Warn` varchar(45) NOT NULL,
+  `PaymentAddress` int NOT NULL,
+  `DeliveryAddress` int NOT NULL,
+  PRIMARY KEY (`IDUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_address`
+--
+
+LOCK TABLES `user_address` WRITE;
+/*!40000 ALTER TABLE `user_address` DISABLE KEYS */;
+INSERT INTO `user_address` VALUES (14,'Nguyen Ha Anh','Kiem','0123456789','abc','BP','DA','123',0,1);
+/*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -266,4 +327,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-05  0:08:21
+-- Dump completed on 2021-12-11 23:11:03
