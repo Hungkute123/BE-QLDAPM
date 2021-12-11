@@ -14,9 +14,11 @@ import { discountController } from '../../controllers/discount.Controller';
 //--------------------------------------------GET------------------------------------------
 discountRouter.get('/iduser', discountController.getDiscountByIDUser);
 discountRouter.get('/idproduct', discountController.getDiscountByIDProduct);
-
+discountRouter.get('/iddiscount', discountController.getDiscountByIDDiscount);
 //--------------------------------------------POST-----------------------------------------
 discountRouter.post('/add-new-discount', discountController.addNewDiscount);
+//--------------------------------------------PATCH------------------------------------------
+discountRouter.patch('/patch-discount', discountController.patchDiscount);
 //--------------------------------------------PUT------------------------------------------
 
 //--------------------------------------------DELETE----------------------------------------

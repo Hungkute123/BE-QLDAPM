@@ -44,6 +44,22 @@ class CategoryController {
 		}
 	);
 
+	getDetailCategoryByID = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const IDCategory = Number(query.IDCategory);
+		const listCategory = [];
+		for (let i = IDCategory; ; ) {
+			const { data } = await categoryServices.getDetailCategoryByID(i);
+			listCategory.push(data);
+			i = data.IDParent;
+			if (data.Level === 0) {
+				break;
+			}
+		}
+
+		res.status(200).send({ data: listCategory });
+   });
+
 	getOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const query = req.query;
 		const IDCategory = Number(query.IDCategory);
@@ -77,4 +93,3 @@ class CategoryController {
 	});
 }
 export const categoryController = new CategoryController();
-

@@ -39,5 +39,28 @@ class DiscountController {
             res.status(status).send({ data: false, message });
         }
 	});
+    getDiscountByIDDiscount = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const IDDiscount: string = String(req.query.IDDiscount);
+		const { data, message, status } = await discountServices.getDiscountByIDDiscount(IDDiscount);
+		res.status(status).send({ data, message });
+	});
+    patchDiscount = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+        const Discount = {
+            IDDiscount: req.body.id_discount,
+            IDProduct: req.body.id_product,
+            DiscountName: req.body.discount_name,
+            VoucherCode: req.body.voucher_code,
+            StartTime: req.body.start_time,
+            EndTime: req.body.end_time,
+            PercentDiscount: req.body.percent_discount,
+            Quantity: req.body.quantity
+        }
+		const { data, message, status } = await discountServices.patchDiscount(Discount);
+        if(data === true){
+            res.status(status).send({ data, message });
+        }else{
+            res.status(status).send({ data: false, message });
+        }
+	});
 }
 export const discountController = new DiscountController();

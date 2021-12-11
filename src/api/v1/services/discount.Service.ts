@@ -51,5 +51,36 @@ class DiscountServices {
 			throw new Error(error.messages);
 		}
 	};
+	getDiscountByIDDiscount = async (IDDiscount: string) => {
+		try {
+			const discount = await discountModel.getDiscountByIDDiscount(IDDiscount);
+			if (discount === null) {
+				return {
+					data: null,
+					message: 'can not find discount',
+					status: 400,
+				};
+			}
+			return {
+				data: discount,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	patchDiscount = async (Discount: any) => {
+		try {
+			await discountModel.patchDiscount(Discount);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 export const discountServices = new DiscountServices();
