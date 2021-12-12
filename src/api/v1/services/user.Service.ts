@@ -91,6 +91,18 @@ class UserService {
 			throw new Error(error.messages);
 		}
 	};
+
+	getAllUser = async () => {
+		const users = await userModel.getAllUser();
+		return users;
+	};
+
+	activeUser = async (active: number, userId: number) => {
+		console.log(active, userId);
+		
+		await userModel.activeUser(active, userId)
+		return true;
+	}
 }
 
 export const userService = new UserService();

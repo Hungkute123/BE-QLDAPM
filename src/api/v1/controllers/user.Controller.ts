@@ -33,7 +33,7 @@ class UserController {
 		if (ret) {
 			const data = await userService.getUserByEmail(email);
 			const accessToken = jwt.sign({ ...data }, process.env.ACCESS_TOKEN_SECRET as string, {
-				expiresIn: '30000s',
+				expiresIn: process.env.TIMERESET,
 			});
 
 			res.json({ data: accessToken, message: 'Login success', Path });
@@ -113,7 +113,39 @@ class UserController {
 	});
 
 	getInfo = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		res.status(200).json({ data: res.locals.data, message: 'Info' });
+		const data = await userService.getUserByEmail(res.locals.email);
+
+		res.status(200).json({ data });
+	});
+
+	getAllUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const data = await userService.getAllUser();
+
+		if(!data) {
+			res.status(200).json({data: [], message: 'Info'});
+		}
+		else res.status(200).json({data: data.map((item: any) => {
+			return {
+				userid: item.IDUser,
+				active: item.Active,
+				email: item.Email,
+				firstname: item.FirstName,
+				lastname: item.LastName,
+				phonenumber: item.PhoneNumber,
+				typeofuser: item.TypeOfUser
+			}
+		}), message: 'Info'});
+	});
+
+	activeUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const {active, userid} = req.query;
+		console.log('active,', active);
+		
+		if(active != undefined && userid) {
+			const data = await userService.activeUser(Number(active), Number(userid))
+		}
+	
+		res.status(200).json({data: userid, message: 'Info'});
 	});
 }
 
