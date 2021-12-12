@@ -86,8 +86,9 @@ class CategoryController {
 	});
 
 	addOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const { IDCategory } = req.body;
-		const { data, message, status } = await categoryServices.addOneCategory(IDCategory);
+		const { Level, Name, IDParent } = req.body;
+		const newData = { Level, Name, IDParent };
+		const { data, message, status } = await categoryServices.addOneCategory(newData);
 
 		res.status(status).send({ data, message });
 	});
