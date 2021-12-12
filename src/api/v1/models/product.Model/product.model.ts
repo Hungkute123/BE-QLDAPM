@@ -228,9 +228,7 @@ class ProductsModel {
 		return rows;
 	}
 	async getProductsByIDUser(IDUser: number) {
-		const rows = await database.load(
-			`select * from ${TBL_PRODUCTS} where IDUser = ${IDUser}`
-		);
+		const rows = await database.load(`select * from ${TBL_PRODUCTS} where IDUser = ${IDUser}`);
 
 		if (rows.length === 0) return null;
 
@@ -239,11 +237,27 @@ class ProductsModel {
 	async addNewProduct(Product: any) {
 		return database.add(Product, TBL_PRODUCTS);
 	}
-	async addDetailBook(Book: any){
+	async addDetailBook(Book: any) {
 		return database.add(Book, TBL_BOOKS);
 	}
-	async addDetailItem(Item: any){
+	async addDetailItem(Item: any) {
 		return database.add(Item, TBL_ITEMS);
+	}
+	patchProduct(entity: any) {
+		const condition = { IDProduct: entity.IDProduct };
+		delete entity.IDProduct;
+		return database.patch(entity, condition, TBL_PRODUCTS);
+	}
+	patchItem(entity: any) {
+		const condition = { IDItem: entity.IDItem };
+		delete entity.IDItem;
+		return database.patch(entity, condition, TBL_ITEMS);
+	}
+	patchBook(entity: any) {
+		const condition = { IDBook: entity.IDBook };
+		delete entity.IDBook;
+		return database.patch(entity, condition, TBL_BOOKS);
 	}
 }
 export const productsModel = new ProductsModel();
+

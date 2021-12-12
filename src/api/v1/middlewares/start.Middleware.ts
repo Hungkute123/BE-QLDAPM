@@ -9,8 +9,9 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import expressSession from 'express-session';
 
-
-export function startMiddleware (app: Express): void {
+export function startMiddleware(app: Express): void {
+	app.use(express.json({ limit: '50mb' }));
+	app.use(express.urlencoded({ limit: '50mb', extended: true }));
 	// passportMiddleware(); // use passportjs
 	app.use(morgan('combined')); // check api
 	app.use(cors()); // open for all cors
@@ -25,7 +26,7 @@ export function startMiddleware (app: Express): void {
 		rateLimit({
 			windowMs: 60 * 1000, // 1 minutes
 			max: 500, // max is 500 request
-		}),
+		})
 	);
 
 	app.use(cookieParser()); // cookie-parser

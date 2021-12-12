@@ -26,6 +26,8 @@ productsRouter.get('/iduser', productsController.getProductsByIDUser);
 
 //--------------------------------------------POST-----------------------------------------
 productsRouter.post('/add-new-product', productsController.addNewProduct);
+//--------------------------------------------PATCH------------------------------------------
+productsRouter.patch('/patch-product', productsController.patchProduct);
 
 //--------------------------------------------PUT------------------------------------------
 

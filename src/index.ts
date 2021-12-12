@@ -31,6 +31,7 @@ import { routersApi } from './api/v1/routes/start.Route';
 routersApi(app);
 
 import { unexpectedError } from './api/v1/middlewares/unexpectedError.Middleware';
+
 app.use(unexpectedError);
 app.use(express.static(path.join(__dirname, 'assets')));
 
