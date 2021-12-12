@@ -1,31 +1,16 @@
-import { TBL_USER, TBL_OTP } from '../../../../constants/tables';
+import {
+	TBL_USER,
+	TBL_OTP,
+	TBL_INFORMATION_VAT,
+	TBL_USER_ADDRESS,
+} from '../../../../constants/tables';
 import { database } from '../../../../start/connectDB';
 
 class UserModel {
 	// Get Data
-	async getUserByPhoneNumber(PhoneNumber: string) {
-		const rows = await database.load(
-			`select * from ${TBL_USER} where PhoneNumber = "${PhoneNumber}"`
-		);
-
-		if (rows.length === 0) return null;
-
-		return rows[0];
-	}
-
-	async getAllUser() {
-		const rows = await database.load(
-			`select * from ${TBL_USER}`
-		);
-
-		if (rows.length === 0) return null;
-
-		return rows;
-	}
-
 	async getUserByEmail(Email: string) {
 		const rows = await database.load(
-			`select IDUser, FirstName, LastName, Email, DateOfBirth, Gender, TypeOfUser, Active from ${TBL_USER} where Email = "${Email}"`
+			`select IDUser, FirstName, LastName, Email, DateOfBirth, Gender, TypeOfUser, Active, Vip, PhoneNumber from ${TBL_USER} where Email = "${Email}"`
 		);
 
 		if (rows.length === 0) return null;
@@ -35,6 +20,24 @@ class UserModel {
 
 	async getPassword(Email: string) {
 		const rows = await database.load(`select Password from ${TBL_USER} where Email = "${Email}"`);
+
+		if (rows.length === 0) return null;
+
+		return rows[0];
+	}
+
+	async getAllUser() {
+		const rows = await database.load(`select * from ${TBL_USER}`);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+
+	async getInformationVAT(IDUser: number) {
+		const rows = await database.load(
+			`select * from ${TBL_INFORMATION_VAT} where IDUser = ${IDUser}`
+		);
 
 		if (rows.length === 0) return null;
 
@@ -56,15 +59,35 @@ class UserModel {
 		return database.add(otp, TBL_OTP);
 	}
 
+	async addInformationVAT(information: Object, IDUSer: string) {
+		const rows = await database.load(
+			`select * from ${TBL_INFORMATION_VAT} where IDUser = ${IDUSer}`
+		);
+
+		if (rows.length != 0) {
+			database.del({ IDUSer: IDUSer }, TBL_INFORMATION_VAT);
+		}
+
+		return database.add(information, TBL_INFORMATION_VAT);
+	}
+
+	async addAddress(address: Object) {
+		return database.add(address, TBL_USER_ADDRESS);
+	}
+
 	// Edit Date
-	editUser(User: Object, IDUser: number) {
+	updateUser(User: Object, IDUser: Object) {
 		return database.patch(User, IDUser, TBL_USER);
 	}
 
+	updateAddress(address: Object, IDUser: Object) {
+		return database.patch(address, IDUser, TBL_USER_ADDRESS);
+	}
+
 	activeUser(active: number, IDUser: number) {
-		const entity = {Active: !active}
-		const condition = {IDUser: IDUser}
-		
+		const entity = { Active: !active };
+		const condition = { IDUser: IDUser };
+
 		return database.patch(entity, condition, TBL_USER);
 	}
 	// Delete Data
