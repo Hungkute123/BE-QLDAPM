@@ -260,6 +260,42 @@ class ProductService {
 			throw new Error(error.messages);
 		}
 	};
+	patchProduct = async (Product: any) => {
+		try {
+			await productsModel.patchProduct(Product);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	patchItem = async (Item: any) => {
+		try {
+			await productsModel.patchItem(Item);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	patchBook= async (Book: any) => {
+		try {
+			await productsModel.patchBook(Book);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 
 export const productService = new ProductService();

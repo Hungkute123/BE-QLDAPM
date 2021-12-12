@@ -35,12 +35,19 @@ class CategoryModel {
 		if (rows.length === 0) return null;
 
 		return rows;
+    }
+	async getDetailCategoryByID(IDCategory: number){
+		const rows = await database.load(`select * from ${TBL_CATEGORYPRODUCT} where IDCategory = ${IDCategory}`);
+		if (rows.length === 0) return null;
+
+		return rows[0];
 	}
 
 	async getOneCategory(IDCategory: number) {
 		const rows = await database.load(
 			`select * from ${TBL_CATEGORYPRODUCT} where IDCategory = ${IDCategory}`
 		);
+
 		if (rows.length === 0) return null;
 
 		return rows[0];
@@ -60,5 +67,6 @@ class CategoryModel {
 	async addOneCategory(category: any) {
 		return database.add(category, TBL_CATEGORYPRODUCT);
 	}
+
 }
 export const categoryModel = new CategoryModel();
