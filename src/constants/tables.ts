@@ -8,3 +8,5 @@ export const TBL_OTP:string = 'otp';
 export const TBL_DISCOUNT:string = 'discount';
 export const TBL_INFORMATION_VAT:string = 'information_vat';
 export const TBL_USER_ADDRESS:string = 'user_address';
+export const TBL_STATISTIC: string = 'statistics';
+
