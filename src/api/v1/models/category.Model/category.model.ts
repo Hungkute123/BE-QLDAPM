@@ -6,11 +6,11 @@ class CategoryModel {
 		let rows = [];
 		if (Level === 0) {
 			rows = await database.load(
-				`SELECT * FROM ${TBL_CATEGORYPRODUCT} WHERE Level = ${Level}`
+				`SELECT * FROM ${TBL_CATEGORYPRODUCT} WHERE IDParent='0'`
 			);
 		} else {
 			rows = await database.load(
-				`SELECT c1.IDCategory, c1.Name, c1.Level, c1.IDParent, c2.Name as ParentName 
+				`SELECT c1.IDCategory, c1.Name, c1.IDParent, c2.Name as ParentName 
 				FROM ${TBL_CATEGORYPRODUCT} c1 INNER JOIN ${TBL_CATEGORYPRODUCT} c2 ON c1.IDParent = c2.IDCategory 
 				WHERE c1.Level = ${Level}`
 			);
@@ -68,5 +68,33 @@ class CategoryModel {
 		return database.add(category, TBL_CATEGORYPRODUCT);
 	}
 
+	async getAllCate() {
+		let rows = [];
+		
+		rows = await database.load(
+			`SELECT c1.IDCategory, c1.Name, c1.IDParent, c2.Name as ParentName 
+			FROM ${TBL_CATEGORYPRODUCT} c1 Left JOIN ${TBL_CATEGORYPRODUCT} c2 ON c1.IDParent = c2.IDCategory 
+			`
+		);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+
+	async searchCate(text: string) {
+		let rows = [];
+		
+		rows = await database.load(
+			`SELECT c1.IDCategory, c1.Name, c1.IDParent, c2.Name as ParentName 
+			FROM ${TBL_CATEGORYPRODUCT} c1 Left JOIN ${TBL_CATEGORYPRODUCT} c2 ON c1.IDParent = c2.IDCategory 
+			where c1.Name like '%${text}%'
+			`
+		);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
 }
 export const categoryModel = new CategoryModel();

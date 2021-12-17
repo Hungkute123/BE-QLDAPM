@@ -71,8 +71,8 @@ class CategoryController {
 	});
 
 	updateOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const { IDCategory, Name, IDParent, Level } = req.body;
-		const category = { IDCategory, Name, IDParent, Level };
+		const { IDCategory, Name, IDParent } = req.body;
+		const category = { IDCategory, Name, IDParent };
 		const { data, message, status } = await categoryServices.updateOneCategory(category);
 
 		res.status(status).send({ data, message });
@@ -86,9 +86,22 @@ class CategoryController {
 	});
 
 	addOneCategory = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const { Level, Name, IDParent } = req.body;
-		const newData = { Level, Name, IDParent };
+		const { Name, IDParent } = req.body;
+		const newData = { Name, IDParent };
 		const { data, message, status } = await categoryServices.addOneCategory(newData);
+
+		res.status(status).send({ data, message });
+	});
+
+	getAllCate = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { data, message, status } = await categoryServices.getAllCate();
+
+		res.status(status).send({ data, message });
+	});
+
+	searchCate = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const {text} = req.query;
+		const { data, message, status } = await categoryServices.searchCate(text ? text.toString() : '');
 
 		res.status(status).send({ data, message });
 	});
