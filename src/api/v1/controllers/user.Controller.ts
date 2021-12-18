@@ -240,6 +240,17 @@ class UserController {
 	
 		res.status(200).json({data: userid, message: 'Info'});
 	});
+
+	updateRole = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const {role, userid} = req.body;		
+
+		await userService.updateRole(parseInt(role), parseInt(userid));
+
+		res.status(200).json({ data: {
+			userid,
+			role
+		} });
+	});
 }
 
 export const userController = new UserController();

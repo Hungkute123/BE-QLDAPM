@@ -161,5 +161,45 @@ getDetailCategoryByID = async (IDCategory: number) => {
 			throw new Error(error.messages);
 		}
 	};
+
+	getAllCate = async () => {
+		try {
+			const category = await categoryModel.getAllCate()
+			if (category === null) {
+				return {
+					data: null,
+					message: 'can not find categories',
+					status: 400,
+				};
+			}
+			return {
+				data: category,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+
+	searchCate = async (text: string) => {
+		try {
+			const category = await categoryModel.searchCate(text)
+			if (category === null) {
+				return {
+					data: null,
+					message: 'can not find categories',
+					status: 400,
+				};
+			}
+			return {
+				data: category,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 export const categoryServices = new CategoryServices()
