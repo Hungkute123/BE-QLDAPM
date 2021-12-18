@@ -29,7 +29,6 @@ class UserController {
 
 		const pass = await userService.getPassword(email);
 		const ret = bcrypt.compareSync(password, pass.Password);
-
 		if (ret) {
 			const data = await userService.getUserByEmail(email);
 			const accessToken = jwt.sign({ ...data }, process.env.ACCESS_TOKEN_SECRET as string, {
