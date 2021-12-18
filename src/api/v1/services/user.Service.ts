@@ -151,10 +151,12 @@ class UserService {
 		return users;
 	};
 
-	activeUser = async (active: number, userId: number) => {
-		console.log(active, userId);
-		
+	activeUser = async (active: number, userId: number) => {		
 		await userModel.activeUser(active, userId)
+		return true;
+	};
+	updateRole = async (role: number, userId: number) => {		
+		await userModel.updateRole(role, userId)
 		return true;
 	}
 }

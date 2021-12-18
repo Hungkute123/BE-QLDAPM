@@ -296,6 +296,20 @@ class ProductService {
 			throw new Error(error.messages);
 		}
 	};
+
+	blockProduct = async (IDProduct: any, status: any) => {
+		const entity = {IDProduct: IDProduct, status: status};
+		try {
+			await productsModel.patchProduct(entity);
+			return {
+				data: true,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 
 export const productService = new ProductService();
