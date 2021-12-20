@@ -3,6 +3,7 @@ class OrderService {
 	getAll = async () => {
 		try {
 			const order = await orderModel.all();
+			
 			if (order === null) {
 				return {
 					data: null,
@@ -16,6 +17,8 @@ class OrderService {
 				status: 200,
 			};
 		} catch (error: any) {
+			console.log(error);
+			
 			throw new Error(error.messages);
 		}
 	};

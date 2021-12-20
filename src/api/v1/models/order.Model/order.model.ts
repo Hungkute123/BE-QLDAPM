@@ -1,10 +1,14 @@
 import internal from 'stream';
-import { TBL_BOOKS, TBL_ITEMS, TBL_PRODUCTS, TBL_FAVORITE, TBL_ORDER } from '../../../../constants/tables';
+import { TBL_ORDER, TBL_PRODUCTS } from '../../../../constants/tables';
 import { database } from '../../../../start/connectDB';
 
 class OrderModel {
 	async all() {
-		return database.load(`select * from ${TBL_ORDER}`);
+		var query = `select * from ${TBL_ORDER}`;
+		//var query = `SELECT * FROM db_fahasa.order;`;
+		console.log(query);
+		
+		return database.load(query);
 	}
 	
 	async addNewOrder(Order: any) {

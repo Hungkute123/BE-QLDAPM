@@ -9,6 +9,6 @@ export const TBL_DISCOUNT:string = 'discount';
 export const TBL_INFORMATION_VAT:string = 'information_vat';
 export const TBL_USER_ADDRESS:string = 'user_address';
 export const TBL_STATISTIC: string = 'statistics';
-export const TBL_ORDER: string = 'order';
+export const TBL_ORDER: string = 'db_fahasa.order';
 
 

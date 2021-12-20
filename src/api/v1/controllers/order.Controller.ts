@@ -8,10 +8,10 @@ import multer from 'multer';
 // Middlewares
 import { asyncMiddleware } from '../middlewares/async.Middleware';
 import { search } from '../routes/routersApi/category.Router';
-
 // services
 import  {orderService}  from '../services/order.Services';
 import cloudinary from '../../../start/cloudinaryConfig';
+import { reduceEachLeadingCommentRange } from 'typescript';
 const generator = require('generate-password');
 class OrderController {
 	//-----------------------------------GET----------------------------------
@@ -19,32 +19,25 @@ class OrderController {
 		const { data, message, status } = await orderService.getAll();
 		const Path = process.env.PATH_API;
 		res.status(status).send({ data, message, Path });
+		//res.send("day la controller cua order");
 	});
 	
 	addNewOrder = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		try {
-			const id = generator.generate({
-				length: 8,
-				numbers: false,
-			});
 			const order = {
-				IDOrder: String(id),
-				IDUser: Number(req.body.id_user),
-                IDProduct: String(req.body.id_product),
-				OrderDate: String(Date.now()),
-                Quantity: Number(req.body.quantity),
-                Status: "dang xu ly"
+				IDUser: req.body.id_user,
+                IDProduct: req.body.id_product,
+				OrderDate: req.body.order_date,
+                Quantity: req.body.quantity,
+                Status: req.body.status,
 			};
+			console.log(order);
+			
 			const { data, message, status } = await orderService.addNewOrder(order);
-			if (data === true) {
-				res.status(status).send({ data, message });
-			} else {
-				res.status(status).send({ data: false, message });
+			if(data === true) {
+				res.status(status).send({ data, message });	
+			}else{
+				res.status(status).send({data: false, message});
 			}
-		} catch (err) {
-			console.error(err);
-			res.status(500).json({ err: 'Something went wrong' });
-		}
-	});
+		});
 }
 export const orderController = new OrderController();

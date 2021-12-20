@@ -319,26 +319,15 @@ INSERT INTO `user_address` VALUES (15,'dsds','dsd','','','Thành phố Hà Nội
 /*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `order`;
-CREATE TABLE `db_fahasa`.`order` (
+CREATE TABLE `order` (
   `IDOrder` INT NOT NULL AUTO_INCREMENT,
   `IDUser` INT NULL,
-  `IDProduct` VARCHAR(45) NOT NULL,
-  `OrderDate` DATE NULL,
+  `IDProduct` VARCHAR(100) NULL,
+  `OrderDate` VARCHAR(45) NULL,
   `Quantity` INT NULL,
-  `Status` VARCHAR(45) NULL,
-  PRIMARY KEY (`IDOrder`),
-  INDEX `order_user_idx` (`IDUser` ASC) VISIBLE,
-  INDEX `order_product_idx` (`IDProduct` ASC) VISIBLE,
-  CONSTRAINT `order_user`
-    FOREIGN KEY (`IDUser`)
-    REFERENCES `db_fahasa`.`user` (`IDUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `order_product`
-    FOREIGN KEY (`IDProduct`)
-    REFERENCES `db_fahasa`.`product` (`IDProduct`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+  `Status` VARCHAR(25) NULL,
+  PRIMARY KEY (`IDOrder`));
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

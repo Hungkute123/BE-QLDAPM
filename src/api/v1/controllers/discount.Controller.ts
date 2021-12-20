@@ -31,6 +31,13 @@ class DiscountController {
             EndTime: req.body.end_time,
             PercentDiscount: req.body.percent_discount,
             Quantity: req.body.quantity
+            // IDProduct: '1116090011532',
+            // DiscountName: 'discount',
+            // VoucherCode: 'ABC',
+            // StartTime: '2021-12-12T16:52',
+            // EndTime: '2021-12-15T16:52',
+            // PercentDiscount: 4,
+            // Quantity: 50
         }
 		const { data, message, status } = await discountServices.addNewDiscount(Discount);
         if(data === true){
