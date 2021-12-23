@@ -14,6 +14,8 @@ import { productsController } from '../../controllers/products.Controller';
 
 //--------------------------------------------GET------------------------------------------
 productsRouter.get('/all', productsController.getAllProduct);
+productsRouter.get('/all-product-publisher', productsController.getAllProductPublisher);
+productsRouter.get('/all-product-supplier', productsController.getAllProductSupplier);
 productsRouter.get('/idcategory-limit', productsController.getProductsByIDCategoryWithSetLimit);
 productsRouter.get('/idcategory', productsController.getAllProductsByIDCategory);
 productsRouter.get('/idproduct', productsController.getProductByIDProduct);

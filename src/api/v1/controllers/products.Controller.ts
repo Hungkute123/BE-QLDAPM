@@ -20,6 +20,14 @@ class ProductsController {
 		const Path = process.env.PATH_API;
 		res.status(status).send({ data, message, Path });
 	});
+	getAllProductPublisher = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { data, message, status } = await productService.getAllProductPublisher();
+		res.status(status).send({ data, message });
+	});
+	getAllProductSupplier = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { data, message, status } = await productService.getAllProductSupplier();
+		res.status(status).send({ data, message });
+	});
 	getProductsByIDCategoryWithSetLimit = asyncMiddleware(
 		async (req: Request, res: Response): Promise<void> => {
 			const query = req.query;
@@ -48,7 +56,30 @@ class ProductsController {
 		const query = req.query;
 		const IDProduct = String(query.IDProduct);
 		const Path = process.env.PATH_API;
-		const { data, message, status } = await productService.getProductByIDProduct(IDProduct);
+		let { data, message, status } = await productService.getProductByIDProduct(IDProduct);
+		if (data !== null) {
+			const { dataImage } = await productService.getProductImageByIDProduct(IDProduct);
+			if (dataImage !== null) {
+				const SubImage = { SubImage: dataImage };
+				data = [{ ...data[0], ...SubImage }];
+			}
+			if (data[0].TypeProduct === 'Book') {
+				const { dataPublisher } = await productService.getProductPublisherByIDPublisher(
+					Number(data[0].IDPublisher)
+				);
+				if (dataPublisher !== null) {
+					const Publisher = { Publishser: dataPublisher };
+					data = [{ ...data[0], ...Publisher }];
+				}
+				const { dataSupplier } = await productService.getProductSupplierByIDSupplier(
+					Number(data[0].IDSupplier)
+				);
+				if (dataSupplier !== null) {
+					const Supplier = { Supplier: dataSupplier };
+					data = [{ ...data[0], ...Supplier }];
+				}
+			}
+		}
 
 		res.status(status).send({ data, message, Path });
 	});
@@ -235,54 +266,30 @@ class ProductsController {
 		//--------------------use cloudinary---------------------------------
 
 		try {
-			let CoverImage: string = '';
-			let ImageOne: string = '';
-			let ImageTwo: string = '';
-			let ImageThree: string = '';
-			const fileStrImage = req.body.cover_image;
-			if (fileStrImage !== '') {
-				const uploadResponseImage = await cloudinary.uploader.upload(fileStrImage, {
-					upload_preset: 'products',
-				});
-				CoverImage = uploadResponseImage.public_id;
-			}
-			const fileStrSubImageOne = req.body.image_one;
-			if (fileStrSubImageOne !== '') {
-				const uploadResponseSubImageOne = await cloudinary.uploader.upload(fileStrSubImageOne, {
-					upload_preset: 'products',
-				});
-				ImageOne = uploadResponseSubImageOne.public_id;
-			}
-			const fileStrSubImageTwo = req.body.image_two;
-			if (fileStrSubImageTwo !== '') {
-				const uploadResponseSubImageTwo = await cloudinary.uploader.upload(fileStrSubImageTwo, {
-					upload_preset: 'products',
-				});
-				ImageTwo = uploadResponseSubImageTwo.public_id;
-			}
-
-			const fileStrSubImageThree = req.body.image_three;
-			if (fileStrSubImageThree) {
-				const uploadResponseSubImageThree = await cloudinary.uploader.upload(fileStrSubImageThree, {
-					upload_preset: 'products',
-				});
-				ImageThree = uploadResponseSubImageThree.public_id;
-			}
-
 			const id = generator.generate({
 				length: 3,
 				numbers: false,
 			});
+			const IDProduct = String(Date.now()) + String(id);
+			let Image: string = '';
+
+			const fileStrImage = req.body.image[0].image;
+			if (fileStrImage !== '') {
+				const uploadResponseImage = await cloudinary.uploader.upload(fileStrImage, {
+					upload_preset: 'products',
+				});
+				Image = uploadResponseImage.public_id;
+			}
+
 			const product = {
-				IDProduct: String(Date.now()) + String(id),
+				IDProduct: IDProduct,
 				IDUser: Number(req.body.id_user),
 				IDCategory: Number(req.body.id_category),
 				TypeProduct: req.body.type_product,
 				NameProduct: req.body.product_name,
-				Image: CoverImage,
-				SubImageOne: ImageOne,
-				SubImageTwo: ImageTwo,
-				SubImageThree: ImageThree,
+				Image: Image,
+				City: req.body.city,
+				District: req.body.district,
 				Price: req.body.product_price,
 				Weight: req.body.product_weight,
 				PackagingSize: req.body.product_package_size,
@@ -297,7 +304,23 @@ class ProductsController {
 			} else {
 				res.status(status).send({ data: false, message });
 			}
-
+			if (data === true) {
+				for (let i = 1; i < req.body.image.length; i++) {
+					const fileStrImage = req.body.image[i].image;
+					if (fileStrImage !== '') {
+						const uploadResponseImage = await cloudinary.uploader.upload(fileStrImage, {
+							upload_preset: 'products',
+						});
+						Image = uploadResponseImage.public_id;
+						const product_image = {
+							IDProduct: IDProduct,
+							Image: Image,
+							Order: i,
+						};
+						await productService.addProductImage(product_image);
+					}
+				}
+			}
 			if (req.body.type_product === 'Item' && data === true) {
 				const Item = {
 					IDProduct: product.IDProduct,
@@ -308,14 +331,13 @@ class ProductsController {
 					Color: req.body.product_color,
 					Material: req.body.product_material,
 				};
-				const { data, message, status } = await productService.addDetailItem(Item);
-				console.log(data);
+				await productService.addDetailItem(Item);
 			} else if (req.body.type_product === 'Book' && data === true) {
 				const Book = {
 					IDProduct: product.IDProduct,
 					Author: req.body.product_author,
-					Supplier: req.body.product_supplier,
-					PublishingCompany: req.body.product_publishing_company,
+					IDSupplier: req.body.product_supplier,
+					IDPublisher: req.body.product_publishing_company,
 					CoverForm: req.body.product_cover_form,
 					Translator: req.body.product_translator,
 					PublishingYear: req.body.product_publishing_year,
@@ -390,7 +412,7 @@ class ProductsController {
 				Rating: req.body.product_rating,
 				Status: Number(req.body.status),
 			};
-			
+
 			const { data, message, status } = await productService.patchProduct(product);
 			if (data === true) {
 				res.status(status).send({ data, message });
@@ -410,7 +432,6 @@ class ProductsController {
 					Material: req.body.product_material,
 				};
 				await productService.patchItem(Item);
-				
 			} else if (req.body.type_product === 'Book' && data === true) {
 				const Book = {
 					IDBook: req.body.id_book,
@@ -432,7 +453,7 @@ class ProductsController {
 	});
 
 	blockProduct = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const {IDProduct, statusProduct} = req.body;
+		const { IDProduct, statusProduct } = req.body;
 		const { data, message, status } = await productService.blockProduct(IDProduct, statusProduct);
 		const Path = process.env.PATH_API;
 		res.status(status).send({ data, message, Path });
