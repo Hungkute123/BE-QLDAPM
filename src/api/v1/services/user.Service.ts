@@ -40,6 +40,26 @@ class UserService {
 		}
 	};
 
+	getAllUserAddress = async (IDUser: number) => {
+		try {
+			const address = await userModel.getAllUserAddress(IDUser);
+
+			return address;
+		} catch (error:any) {
+			throw new Error(error.messages);
+		}
+	};
+
+	getUserAddress = async (ID: number) => {
+		try {
+			const address = await userModel.getUserAddress(ID);
+
+			return address;
+		} catch (error:any) {
+			throw new Error(error.messages);
+		}
+	};
+
 	//--------------------------------------------POST-----------------------------------------
 	registerUser = async (User: any) => {
 		try {
@@ -156,6 +176,17 @@ class UserService {
 		
 		await userModel.activeUser(active, userId)
 		return true;
+	}
+
+	//--------------------------------------------DELETE----------------------------------------
+	deleteUserAddress = (ID: number) => {
+		userModel.deleteUserAddress(ID);
+
+		return {
+			data: true,
+			message: 'Delete address successfully',
+			status: 200
+		}
 	}
 }
 
