@@ -430,5 +430,12 @@ class ProductsController {
 			res.status(500).json({ err: 'Something went wrong' });
 		}
 	});
+
+	blockProduct = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const {IDProduct, statusProduct} = req.body;
+		const { data, message, status } = await productService.blockProduct(IDProduct, statusProduct);
+		const Path = process.env.PATH_API;
+		res.status(status).send({ data, message, Path });
+	});
 }
 export const productsController = new ProductsController();

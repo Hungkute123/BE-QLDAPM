@@ -110,7 +110,12 @@ class UserModel {
 
 		return database.patch(entity, condition, TBL_USER);
 	}
+	updateRole(role: number, IDUser: number) {		
+		const entity = { TypeOfUser: role };
+		const condition = { IDUser: IDUser };
 
+		return database.patch(entity, condition, TBL_USER);
+	}
 	// Delete Data
 	deleteUserAddress(ID: number) {
 		const condition = { ID: ID };
