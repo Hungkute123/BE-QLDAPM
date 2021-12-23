@@ -104,6 +104,21 @@ class UserController {
 		res.status(200).json({ data });
 	});
 
+	getAllUserAddress = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const data = await userService.getAllUserAddress(res.locals.idUser);
+
+		res.status(200).json({ data });
+	});
+
+	getUserAddress = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const id = Number(query.ID);
+
+		const data = await userService.getUserAddress(id);
+
+		res.status(200).json({ data });
+	});
+
 	//--------------------------------------------POST-----------------------------------------
 	register = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const query = req.query;
@@ -209,35 +224,48 @@ class UserController {
 
 		res.status(status).json({ data, message });
 	});
-	
+
 	getAllUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const data = await userService.getAllUser();
 
-		if(!data) {
-			res.status(200).json({data: [], message: 'Info'});
-		}
-		else res.status(200).json({data: data.map((item: any) => {
-			return {
-				userid: item.IDUser,
-				active: item.Active,
-				email: item.Email,
-				firstname: item.FirstName,
-				lastname: item.LastName,
-				phonenumber: item.PhoneNumber,
-				typeofuser: item.TypeOfUser
-			}
-		}), message: 'Info'});
+		if (!data) {
+			res.status(200).json({ data: [], message: 'Info' });
+		} else
+			res.status(200).json({
+				data: data.map((item: any) => {
+					return {
+						userid: item.IDUser,
+						active: item.Active,
+						email: item.Email,
+						firstname: item.FirstName,
+						lastname: item.LastName,
+						phonenumber: item.PhoneNumber,
+						typeofuser: item.TypeOfUser,
+					};
+				}),
+				message: 'Info',
+			});
 	});
 
 	activeUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const {active, userid} = req.query;
+		const { active, userid } = req.query;
 		console.log('active,', active);
-		
-		if(active != undefined && userid) {
-			const data = await userService.activeUser(Number(active), Number(userid))
+
+		if (active != undefined && userid) {
+			const data = await userService.activeUser(Number(active), Number(userid));
 		}
-	
-		res.status(200).json({data: userid, message: 'Info'});
+
+		res.status(200).json({ data: userid, message: 'Info' });
+	});
+
+	//--------------------------------------------DELETE----------------------------------------
+	deleteUserAddress = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const ID = Number(query.ID);
+
+		const { data, message, status } = await userService.deleteUserAddress(ID);
+
+		res.status(status).json({ data, message });
 	});
 
 	updateRole = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {

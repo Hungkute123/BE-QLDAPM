@@ -15,6 +15,8 @@ userRouter.get('/login', userController.login);
 userRouter.get('/send-otp', userController.sendOTP);
 userRouter.get('/get-info', authenTokenMiddleware, userController.getInfo);
 userRouter.get('/get-information-vat', authenTokenMiddleware, userController.getInformationVAT);
+userRouter.get('/get-all-address', authenTokenMiddleware, userController.getAllUserAddress);
+userRouter.get('/get-address', authenTokenMiddleware, userController.getUserAddress);
 userRouter.get('/get-all-user',authenticateAdminMiddleware, userController.getAllUser);
 userRouter.get('/active-user', authenticateAdminMiddleware, userController.activeUser);
 
@@ -29,5 +31,6 @@ userRouter.patch('/update-user-address', authenTokenMiddleware, userController.u
 userRouter.patch('/update-role',authenticateAdminMiddleware,  userController.updateRole);
 
 //--------------------------------------------DELETE----------------------------------------
+userRouter.delete('/delete-user-address', authenTokenMiddleware, userController.deleteUserAddress);
 
 export default userRouter;

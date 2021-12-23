@@ -44,6 +44,26 @@ class UserModel {
 		return rows[0];
 	}
 
+	async getAllUserAddress(IDUser: number) {
+		const rows = await database.load(
+			`select * from ${TBL_USER_ADDRESS} where IDUser = ${IDUser}`
+		);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+
+	async getUserAddress(ID: number) {
+		const rows = await database.load(
+			`select * from ${TBL_USER_ADDRESS} where ID = ${ID}`
+		);
+
+		if (rows.length === 0) return null;
+
+		return rows[0];
+	}
+
 	// Add Data
 	registerUser(user: any) {
 		return database.add(user, TBL_USER);
@@ -97,6 +117,11 @@ class UserModel {
 		return database.patch(entity, condition, TBL_USER);
 	}
 	// Delete Data
+	deleteUserAddress(ID: number) {
+		const condition = { ID: ID };
+
+		return database.del(condition, TBL_USER_ADDRESS);
+	}
 }
 
 export const userModel = new UserModel();
