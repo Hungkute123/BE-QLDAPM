@@ -1,11 +1,17 @@
 import internal from 'stream';
-import { TBL_BOOKS, TBL_ITEMS, TBL_PRODUCTS, TBL_FAVORITE } from '../../../../constants/tables';
+import { TBL_BOOKS, TBL_ITEMS, TBL_PRODUCTS, TBL_FAVORITE, TBL_PRODUCT_SUPPLIER, TBL_PRODUCT_PUBLISHER,TBL_PRODUCT_IMAGE } from '../../../../constants/tables';
 import { database } from '../../../../start/connectDB';
 
 class ProductsModel {
 	// lay tat ca san pham
 	async all() {
 		return database.load(`select * from ${TBL_PRODUCTS}`);
+	}
+	async getAllProductSupplier() {
+		return database.load(`select * from ${TBL_PRODUCT_SUPPLIER}`);
+	}
+	async getAllProductPublisher() {
+		return database.load(`select * from ${TBL_PRODUCT_PUBLISHER}`);
 	}
 	async getProductsByIDCategoryWithSetLimit(IDCategory: number, limit: number) {
 		const rows = await database.load(
@@ -32,7 +38,7 @@ class ProductsModel {
 		if (rows.length === 0) {
 			return null;
 		} else {
-			let data: object;
+			let data;
 			if (rows[0].TypeProduct === 'Book') {
 				data = database.load(
 					`select * from ${TBL_PRODUCTS} pd join ${TBL_BOOKS} bk on pd.IDProduct = bk.IDProduct where pd.IDProduct = '${IDProduct}'`
@@ -233,6 +239,30 @@ class ProductsModel {
 		if (rows.length === 0) return null;
 
 		return rows;
+	}
+	async getProductImageByIDProduct(IDProduct: string) {
+		const rows = await database.load(`select * from ${TBL_PRODUCT_IMAGE} where IDProduct = '${IDProduct}'`);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+	async getProductSupplierByIDSupplier(IDSupplier: number) {
+		const rows = await database.load(`select * from ${TBL_PRODUCT_SUPPLIER} where IDSupplier = ${IDSupplier}`);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+	async getProductPublisherByIDPublisher(IDPublisher: number) {
+		const rows = await database.load(`select * from ${TBL_PRODUCT_PUBLISHER} where IDPublisher = ${IDPublisher}`);
+
+		if (rows.length === 0) return null;
+
+		return rows;
+	}
+	async addProductImage(Image: any) {
+		return database.add(Image, TBL_PRODUCT_IMAGE);
 	}
 	async addNewProduct(Product: any) {
 		return database.add(Product, TBL_PRODUCTS);

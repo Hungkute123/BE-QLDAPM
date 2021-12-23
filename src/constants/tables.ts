@@ -10,5 +10,6 @@ export const TBL_INFORMATION_VAT:string = 'information_vat';
 export const TBL_USER_ADDRESS:string = 'user_address';
 export const TBL_STATISTIC: string = 'statistics';
 export const TBL_ORDER: string = 'db_fahasa.order';
-
-
+export const TBL_PRODUCT_SUPPLIER: string = 'product_supplier';
+export const TBL_PRODUCT_PUBLISHER: string = 'product_publisher';
+export const TBL_PRODUCT_IMAGE: string = 'product_image';
