@@ -19,6 +19,44 @@ class ProductService {
 			throw new Error(error.messages);
 		}
 	};
+	getAllProductPublisher = async () => {
+		try {
+			const products = await productsModel.getAllProductPublisher();
+			if (products === null) {
+				return {
+					data: null,
+					message: 'can not find product publisher',
+					status: 400,
+				};
+			}
+			return {
+				data: products,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	getAllProductSupplier = async () => {
+		try {
+			const products = await productsModel.getAllProductSupplier();
+			if (products === null) {
+				return {
+					data: null,
+					message: 'can not find product supplier',
+					status: 400,
+				};
+			}
+			return {
+				data: products,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 	getProductsByIDCategoryWithSetLimit = async (IDCategory: number, limit: number) => {
 		try {
 			const products = await productsModel.getProductsByIDCategoryWithSetLimit(IDCategory, limit);
@@ -217,6 +255,75 @@ class ProductService {
 			}
 			return {
 				data: products,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	getProductImageByIDProduct = async (IDProduct: string) => {
+		try {
+			const image = await productsModel.getProductImageByIDProduct(IDProduct);
+			if (image === null) {
+				return {
+					dataImage: null,
+					message: 'can not find image',
+					status: 400,
+				};
+			}
+			return {
+				dataImage: image,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	getProductPublisherByIDPublisher = async (IDPublisher: number) => {
+		try {
+			const products = await productsModel.getProductPublisherByIDPublisher(IDPublisher);
+			if (products === null) {
+				return {
+					dataPublisher: null,
+					message: 'can not find products',
+					status: 400,
+				};
+			}
+			return {
+				dataPublisher: products,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	getProductSupplierByIDSupplier = async (IDSupplier: number) => {
+		try {
+			const products = await productsModel.getProductSupplierByIDSupplier(IDSupplier);
+			if (products === null) {
+				return {
+					dataSupplier: null,
+					message: 'can not find products',
+					status: 400,
+				};
+			}
+			return {
+				dataSupplier: products,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	addProductImage= async (Product: any) => {
+		try {
+			await productsModel.addProductImage(Product);
+			return {
+				data: true,
 				message: 'Success',
 				status: 200,
 			};
