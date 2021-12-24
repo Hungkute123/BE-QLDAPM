@@ -6,6 +6,7 @@ const productsRouter = Router();
 
 // Controller
 import { productsController } from '../../controllers/products.Controller';
+import { authenticateSellerMiddleware } from '../../middlewares/authenToken.Middleware';
 
 
 
@@ -24,10 +25,10 @@ productsRouter.get('/count-search', productsController.countSearchProduct);
 productsRouter.get('/trend', productsController.productTrends);
 productsRouter.get('/rank', productsController.productRanking);
 productsRouter.get('/favorite-list', productsController.favoriteList);
-productsRouter.get('/iduser', productsController.getProductsByIDUser);
+productsRouter.get('/iduser',authenticateSellerMiddleware, productsController.getProductsByIDUser);
 
 //--------------------------------------------POST-----------------------------------------
-productsRouter.post('/add-new-product', productsController.addNewProduct);
+productsRouter.post('/add-new-product',authenticateSellerMiddleware, productsController.addNewProduct);
 productsRouter.post('/block-product', productsController.blockProduct);
 
 //--------------------------------------------PATCH------------------------------------------
