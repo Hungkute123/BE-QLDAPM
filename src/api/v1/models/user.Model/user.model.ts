@@ -100,8 +100,8 @@ class UserModel {
 		return database.patch(User, IDUser, TBL_USER);
 	}
 
-	updateAddress(address: Object, IDUser: Object) {
-		return database.patch(address, IDUser, TBL_USER_ADDRESS);
+	updateAddress(address: Object, ID: Object) {
+		return database.patch(address, ID, TBL_USER_ADDRESS);
 	}
 
 	activeUser(active: number, IDUser: number) {
@@ -116,6 +116,7 @@ class UserModel {
 
 		return database.patch(entity, condition, TBL_USER);
 	}
+	
 	// Delete Data
 	deleteUserAddress(ID: number) {
 		const condition = { ID: ID };

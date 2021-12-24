@@ -28,7 +28,7 @@ userRouter.post('/add-user-address', authenTokenMiddleware, userController.addUs
 //--------------------------------------------PATCH------------------------------------------
 userRouter.patch('/update-info', authenTokenMiddleware, userController.updateInfo);
 userRouter.patch('/update-user-address', authenTokenMiddleware, userController.updateUserAddress);
-userRouter.patch('/update-role',authenticateAdminMiddleware,  userController.updateRole);
+userRouter.patch('/update-role', authenticateAdminMiddleware,  userController.updateRole);
 
 //--------------------------------------------DELETE----------------------------------------
 userRouter.delete('/delete-user-address', authenTokenMiddleware, userController.deleteUserAddress);
