@@ -199,6 +199,7 @@ CREATE TABLE `order` (
   `IDUser` int DEFAULT NULL,
   `IDProduct` varchar(100) DEFAULT NULL,
   `OrderDate` varchar(45) DEFAULT NULL,
+  `ShippingDate` varchar(45) DEFAULT NULL,
   `Quantity` int DEFAULT NULL,
   `Status` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`IDOrder`)

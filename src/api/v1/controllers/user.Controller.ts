@@ -113,7 +113,7 @@ class UserController {
 	getUserAddress = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const query = req.query;
 		const id = Number(query.ID);
-
+		
 		const data = await userService.getUserAddress(id);
 
 		res.status(200).json({ data });
