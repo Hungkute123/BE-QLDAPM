@@ -214,7 +214,7 @@ class UserController {
 		const address = body.Address;
 		const key = body.key;
 
-		if (key.IDUser != res.locals.idUser) {
+		if (address.IDUser != res.locals.idUser) {
 			res.status(200).json({ data: false, message: 'Illegal access' });
 
 			return;
@@ -249,7 +249,6 @@ class UserController {
 
 	activeUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const { active, userid } = req.query;
-		console.log('active,', active);
 
 		if (active != undefined && userid) {
 			const data = await userService.activeUser(Number(active), Number(userid));
@@ -263,20 +262,24 @@ class UserController {
 		const query = req.query;
 		const ID = Number(query.ID);
 
+		console.log(ID);
+
 		const { data, message, status } = await userService.deleteUserAddress(ID);
 
 		res.status(status).json({ data, message });
 	});
 
 	updateRole = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const {role, userid} = req.body;		
+		const { role, userid } = req.body;
 
 		await userService.updateRole(parseInt(role), parseInt(userid));
 
-		res.status(200).json({ data: {
-			userid,
-			role
-		} });
+		res.status(200).json({
+			data: {
+				userid,
+				role,
+			},
+		});
 	});
 }
 

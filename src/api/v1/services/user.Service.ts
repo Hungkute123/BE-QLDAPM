@@ -152,9 +152,9 @@ class UserService {
 		}
 	};
 
-	updateUserAddress = (address: Object, IDUser: Object) => {
+	updateUserAddress = (address: Object, ID: Object) => {
 		try {
-			userModel.updateAddress(address, IDUser);
+			userModel.updateAddress(address, ID);
 
 			return {
 				data: true,
