@@ -77,3 +77,6 @@ Content-Type: application/json
         "DeliveryAddress": 1
     }
 }
+
+###
+GET http://localhost:5000/api/order/all

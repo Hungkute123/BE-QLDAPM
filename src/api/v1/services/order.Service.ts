@@ -3,7 +3,7 @@ class OrderService {
 	getAll = async () => {
 		try {
 			const order = await orderModel.all();
-			
+
 			if (order === null) {
 				return {
 					data: null,
@@ -18,11 +18,11 @@ class OrderService {
 			};
 		} catch (error: any) {
 			console.log(error);
-			
+
 			throw new Error(error.messages);
 		}
 	};
-	
+
 	addNewOrder = async (Order: any) => {
 		try {
 			await orderModel.addNewOrder(Order);
@@ -35,7 +35,20 @@ class OrderService {
 			throw new Error(error.messages);
 		}
 	};
-	
+
+	getOrderByIDUser = async (IDUser: number) => {
+		try {
+			const order = await orderModel.getOrderByIDUser(IDUser);
+
+			return {
+				data: order,
+				message: `Order ${IDUser}`,
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
 }
 
 export const orderService = new OrderService();
