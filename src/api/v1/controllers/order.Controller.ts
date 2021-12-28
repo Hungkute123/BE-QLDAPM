@@ -31,6 +31,8 @@ class OrderController {
 			OrderDate: req.body.order_date,
 			Quantity: req.body.quantity,
 			Status: req.body.status,
+			Address: req.body.address,
+			Price: req.body.price
 		};
 		console.log(order);
 
@@ -40,6 +42,20 @@ class OrderController {
 		} else {
 			res.status(status).send({ data: false, message });
 		}
+	});
+	getOrderOfSeller = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const IDUser = Number(query.IDUser);
+		const { data, message, status } = await orderService.getOrderOfSeller(IDUser);
+
+		res.status(status).send({ data, message });
+	});
+	updateStatus = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { status, IDOrder } = req.body;
+
+		await orderService.updateStatus(status, parseInt(IDOrder));
+
+		res.status(200).json({ data: true });
 	});
 }
 export const orderController = new OrderController();

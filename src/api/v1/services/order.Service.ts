@@ -35,20 +35,48 @@ class OrderService {
 			throw new Error(error.messages);
 		}
 	};
-
 	getOrderByIDUser = async (IDUser: number) => {
 		try {
 			const order = await orderModel.getOrderByIDUser(IDUser);
-
+			if (order === null) {
+				return {
+					data: null,
+					message: 'can not find order',
+					status: 400,
+				};
+			}
 			return {
 				data: order,
-				message: `Order ${IDUser}`,
+				message: 'Success',
 				status: 200,
 			};
 		} catch (error: any) {
 			throw new Error(error.messages);
 		}
 	};
+	getOrderOfSeller = async (IDUser: number) => {
+		try {
+			const order = await orderModel.getOrderOfSeller(IDUser);
+			if (order === null) {
+				return {
+					data: null,
+					message: 'can not find order',
+					status: 400,
+				};
+			}
+			return {
+				data: order,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	updateStatus = async (status: string, IDOrder: number) => {		
+		await orderModel.updateStatus(status, IDOrder)
+		return true;
+	}
 }
 
 export const orderService = new OrderService();

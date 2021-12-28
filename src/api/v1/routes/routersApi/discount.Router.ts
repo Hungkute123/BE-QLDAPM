@@ -7,18 +7,19 @@ const discountRouter = Router();
 
 // Controller
 import { discountController } from '../../controllers/discount.Controller';
+import { authenticateSellerMiddleware } from '../../middlewares/authenToken.Middleware';
 
 
 //-------------------------------------------- api/discount/... -------------------------------
 
 //--------------------------------------------GET------------------------------------------
-discountRouter.get('/iduser', discountController.getDiscountByIDUser);
+discountRouter.get('/iduser',authenticateSellerMiddleware, discountController.getDiscountByIDUser);
 discountRouter.get('/idproduct', discountController.getDiscountByIDProduct);
-discountRouter.get('/iddiscount', discountController.getDiscountByIDDiscount);
+discountRouter.get('/iddiscount',authenticateSellerMiddleware, discountController.getDiscountByIDDiscount);
 //--------------------------------------------POST-----------------------------------------
-discountRouter.post('/add-new-discount', discountController.addNewDiscount);
+discountRouter.post('/add-new-discount',authenticateSellerMiddleware, discountController.addNewDiscount);
 //--------------------------------------------PATCH------------------------------------------
-discountRouter.patch('/patch-discount', discountController.patchDiscount);
+discountRouter.patch('/patch-discount',authenticateSellerMiddleware, discountController.patchDiscount);
 //--------------------------------------------PUT------------------------------------------
 
 //--------------------------------------------DELETE----------------------------------------
