@@ -29,6 +29,8 @@ class OrderController {
 			OrderDate: req.body.order_date,
 			Quantity: req.body.quantity,
 			Status: req.body.status,
+			Address: req.body.address,
+			Price: req.body.price
 		};
 		console.log(order);
 
