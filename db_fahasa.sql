@@ -47,32 +47,6 @@ INSERT INTO `book` VALUES (1,'3300000002736','Bộ Giáo Dục Và Đào Tạo',
 UNLOCK TABLES;
 
 --
--- Table structure for table `categoryproduct`
---
-
-DROP TABLE IF EXISTS `categoryproduct`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `categoryproduct` (
-  `IDCategory` int NOT NULL AUTO_INCREMENT,
-  `IDParent` int DEFAULT NULL,
-  `Name` varchar(200) DEFAULT NULL,
-  `Level` int DEFAULT NULL,
-  PRIMARY KEY (`IDCategory`)
-) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `categoryproduct`
---
-
-LOCK TABLES `categoryproduct` WRITE;
-/*!40000 ALTER TABLE `categoryproduct` DISABLE KEYS */;
-INSERT INTO `categoryproduct` VALUES (1,0,'Sách Trong Nước',0),(2,0,'FOREIGN BOOKS',0),(3,0,'VPP - Dụng Cụ Học Sinh',0),(4,0,'Đồ Chơi',0),(5,0,'Làm Đẹp - Sức Khỏe',0),(6,0,'Hành Trang Đến Trường',0),(7,0,'VPP - DCHS Theo Thương Hiệu',0),(8,0,'Đồ Chơi Theo Thương Hiệu',0),(9,0,'Bách Hóa Online - Lưu Niệm',0),(10,1,'Văn Học',1),(11,1,'Kinh Tế',1),(12,1,'Tâm Lý - Kỹ Năng Sống',1),(13,1,'Nuôi Dạy con',1),(14,1,'Sách Thiếu Nhi',1),(15,1,'Tiểu Sử - Hồi Ký',1),(16,1,'Giáo Khoa - Tham Khảo',1),(17,1,'Sách Học Ngoại Ngữ',1),(18,2,'Fiction',1),(19,2,'Business & Management',1),(20,2,'Personal Development',1),(21,2,'Children\'s Books',1),(22,2,'Dictionaries & Languages',1),(23,2,'Other Languages',1),(24,2,'Other Categories',1),(25,3,'Bút - Viết',1),(26,3,'Dụng Cụ Học Sinh',1),(27,3,'Dụng Cụ Văn Phòng',1),(28,3,'Dụng Cụ Vẽ',1),(29,3,'Sản Phẩm Về Giấy',1),(30,3,'Sản Phẩm Khác',1),(31,3,'Sản Phẩm Điện Tử',1),(32,3,'Sản Phẩm Mới',1),(33,10,'Tiểu Thuyết',2),(34,10,'Truyện Ngắn - Tản Văn',2),(35,10,'Light Novel',2),(36,10,'Ngôn Tình',2),(37,10,'Trinh Thám',2),(38,10,'Truyện Ma',2),(39,11,'Nhân Vật - Bài Học Kinh Doanh',2),(40,11,'Quản Trị - Lãnh Đạo',2),(41,11,'Marketing - Bán Hàng',2),(42,11,'Phân Tích Kinh Tế',2),(43,12,'Kỹ Năng Sống',2),(44,12,'Rèn Luyện Nhân Cách',2),(45,12,'Tâm Lý',2),(46,12,'Sách Cho Tuổi Mới Lớn',2),(47,11,'Tài Chính - Ngân Hàng',2),(48,12,'Chicken Soup - Hạt Giống Tâm Hồn',2),(49,13,'Cẩm Nang Làm Cha Mẹ',2),(50,13,'Phương Pháp Giáo Dục Trẻ Các Nước',2),(51,13,'Phát Triển Trí Tuệ Cho Trẻ',2),(52,13,'Phát Triển Kỹ Năng Cho Trẻ',2),(53,13,'Giáo Dục Trẻ Tuổi Teen',2),(54,14,'Manga - Comic',2),(55,14,'Kiến Thức Bách Khoa',2),(56,14,'Sách Tranh Kỹ Năng Sống Cho Trẻ',2),(57,14,'Vừa Học - Vừa Học Vừa Chơi Với Trẻ',2),(58,14,'Từ Điển Thiếu Nhi',2),(59,15,'Câu Chuyện Cuộc Đời',2),(60,15,'Chính Trị',2),(61,15,'Kinh Tế',2),(62,15,'Nghệ Thuật - Giải Trí',2),(63,15,'Thể Thao',2),(64,16,'Sách Giáo Khoa',2),(65,16,'Sách Tham Khảo',2),(66,16,'Luyện thi ĐH, CĐ',2),(67,16,'Mẫu Giáo',2),(68,16,'Đại Học',2),(69,17,'Tiếng Anh',2),(70,17,'Tiếng Nhật',2),(71,17,'Tiếng Hoa',2),(72,17,'Tiếng Hàn',2),(73,17,'Tiếng Pháp',2),(74,5,'Làm Đẹp - Sức Khỏe',1),(75,74,'Khẩu Trang',2),(76,74,'Các Loại Nước Rửa Tay - Xà Phòng',2),(77,74,'Băng Keo Cá Nhân',2),(78,74,'Khăn Giấy - Giấy Ướt',2),(79,74,'Chăm Sóc Cá Nhân Khác ',2),(80,74,'Sản Phẩm Làm Đẹp',2),(81,18,'Contemporary Fiction',2),(82,18,'Romance',2),(83,18,'Fantasy',2),(84,18,'Classics',2),(85,19,'Business & Management',2),(86,19,'Economics',2),(87,19,'Finance & Accounting',2),(88,20,'Popular Psychology',2),(89,20,'Advice On Careers & Achieving Success',2),(90,20,'Personal Finance',2),(91,21,'Picture & Activity Books',2),(92,21,'Fiction (For Kids & Teen)',2),(93,21,'Education',2),(94,21,'Non-Fiction',2),(95,22,'ELT: Learning Material & Coursework',2),(96,22,'ELT: English For Specific Purposes',2),(97,22,'Dictionaries',2),(98,23,'Japanese Books',2),(99,23,'German Books',2),(100,23,'French Books',2),(101,24,'Biography',2),(102,24,'Society & Social Sciences',2),(103,24,'Science & Geography',2),(104,24,'Food & Drink',2),(105,25,'Bút Bi - Ruột Bút Bi',2),(106,25,'Bút Gel - Bút Nước',2),(107,25,'Bút Mực - Bút Máy',2),(108,25,'Bút Dạ Quang',2),(109,25,'Bút Chì - Ruột Bút Chì',2),(110,26,'Gôm - Tẩy',2),(111,26,'Gọt Bút Chì',2),(112,26,'Thước',2),(113,26,'Bóp Viết - Hộp Bút',2),(114,26,'Bộ Dụng Cụ Học Tập',2),(115,27,'Bìa - File Hồ Sơ',2),(116,27,'Kẹp Giấy - Kẹp Bướm',2),(117,27,'Đồ Bấm Kim - Kim Bấm - Gỡ Kim',2),(118,27,'Cắm Bút - Bảng Tên',2),(119,28,'Bút Vẽ',2),(120,28,'Màu Vẽ',2),(121,28,'Khay - Cọ Vẽ',2),(122,28,'Tập Vẽ - Giấy Vẽ',2),(123,29,'Tập - Vở',2),(124,29,'Sổ Tay Các Loại',2),(125,29,'Giấy Photo',2),(126,29,'Giấy Note',2),(127,30,'Dao Rọc Giấy - Lưỡi Dao Rọc Giấy - Kéo',2),(128,30,'Băng Keo - Cắt Băng Keo',2),(129,30,'Bút Xóa Nước - Xóa Kéo',2),(130,30,'Hồ Dán',2),(131,31,'Máy Tính Điện Tử',2),(132,4,'Đồ Chơi Nổi Bật',1),(133,4,'Phương Tiện Các Loại',1),(134,4,'Mô Hình Các Loại',1),(135,4,'Đồ chơi theo phim',1),(136,4,'Đồ Chơi Khác',1),(137,132,'Xếp Hình - Lắp Ghép',2),(138,132,'Đồ Chơi Giáo Dục',2),(139,132,'Đồ Chơi Điều Khiển',2),(140,132,'Board Game',2),(141,133,'Ô Tô',2),(142,133,'Máy Bay',2),(143,133,'Tàu Hỏa',2),(144,133,'Tàu Thủy',2),(145,133,'Phương Tiện Khác',2),(146,134,'Mô Hình Giấy',2),(147,134,'Mô Hình Gỗ',2),(148,134,'Mô Hình Nhân Vật',2),(149,134,'Mô Hình Động Vật',2),(150,135,'My Little Pony',2),(151,135,'Paw Patrol',2),(152,135,'Super Wings',2),(153,135,'Chiến Thần Vô Cực - NADO',2),(154,136,'Bột Nặn - Cát Nặn',2),(155,136,'Búp Bê',2),(156,136,'Thú Bông',2),(157,136,'Hướng Nghiệp Nhập Vai',2),(158,6,'Sách Giáo Khoa',1),(159,6,'Sách Tham Khảo',1),(160,6,'Luyện Thi THPTQG - Lớp 12',1),(161,6,'Đồ Nghề Đến Trường',1),(162,158,'Lớp 1',2),(163,158,'Lớp 2',2),(164,158,'Lớp 3',2),(165,158,'Lớp 4',2),(166,158,'Lớp 5',2),(167,158,'Lớp 6',2),(168,158,'Lớp 7',2),(169,158,'Lớp 8',2),(170,158,'Lớp 9',2),(171,158,'Lớp 10',2),(172,158,'Lớp 11',2),(173,158,'Lớp 12',2),(174,159,'Mẫu Giáo',2),(175,159,'Lớp 1',2),(176,159,'Lớp 2',2),(177,159,'Lớp 3',2),(178,159,'Lớp 4',2),(179,159,'Lớp 5',2),(180,159,'Lớp 6',2),(181,159,'Lớp 7',2),(182,159,'Lớp 8',2),(183,159,'Lớp 9',2),(184,159,'Lớp 10',2),(185,159,'Lớp 11',2),(186,159,'Lớp 12',2),(187,160,'Luyện Thi Môn Toán',2),(188,160,'Luyện Thi Môn Ngữ Văn',2),(189,160,'Luyện Thi Môn Tiếng Anh',2),(190,160,'Luyện Thi Môn Vật Lý',2),(191,160,'Luyện Thi Môn Hóa Học',2),(192,160,'Luyện Thi Môn Sinh Học',2),(193,160,'Luyện Thi Môn Địa Lý',2),(194,160,'Luyện Thi Môn Lịch Sử',2),(195,161,'Cặp , Ba Lô',2),(196,161,'Máy Tính',2),(197,161,'Bút Các Loại',2),(198,161,'Bóp Viết - Hộp Bút',2),(199,161,'Tập Vở',2),(200,161,'Bao Tập - Bao Sách',2),(201,161,'Mực',2),(202,161,'Gôm - Tẩy',2),(203,161,'Gọt Bút Chì',2),(204,161,'Compa',2),(205,161,'Bảng Viết - Bông Lau Bảng',2),(206,161,'Phấn - Hộp Đựng Phấn',2),(207,7,'Thương hiệu',1),(208,207,'Thiên Long',2),(209,207,'Thương Hiệu Hàn Quốc - Morning Glory',2),(210,207,'Thương Hiệu Hàn Quốc - Kyobo',2),(211,207,'Thương Hiệu Nhật - Kinokuniya',2),(212,207,'Thương Hiệu Nhật - Artline',2),(213,207,'Thương Hiệu Nhật - Marvy',2),(214,207,'Thương Hiệu Tây Ban Nha - Milan',2),(215,207,'Thương Hiệu Tây Ban Nha - Apli',2),(216,207,'Thương Hiệu Anh Quốc - Helix',2),(217,207,'Thương Hiệu Đức - Faber-Castell',2),(218,207,'Thương Hiệu Đức - Stabilo',2),(219,207,'Thương Hiệu Pháp - Maped',2),(220,207,'Thương Hiệu Indonesia - Bantex',2),(221,8,'Đồ chơi',1),(222,221,'Lego',2),(223,221,'tiNiToy',2),(224,221,'Lắp Ráp DUKA',2),(225,221,'Lắp Ráp Sluban',2),(226,221,'Lắp Ráp LaQ',2),(227,221,'Mô Hình Gỗ DIY - Robotime',2),(228,221,'Đồ Chơi VBCare',2),(229,221,'Hot Wheels',2),(230,221,'Play-Doh',2),(231,221,'Barbie',2),(232,9,'Đồ dùng cá nhân',1),(233,9,'Đồ điện gia dụng',1),(234,9,'Nhà cửa đời sống',1),(235,9,'Lưu niệm',1),(236,9,'Sản phẩm khác',1),(237,232,'Túi - Ví Thời Trang',2),(238,232,'Đồng Hồ',2),(239,232,'Phụ Kiện Du Lịch',2),(240,232,'Phụ Kiện Tóc',2),(241,233,'Đèn Bàn',2),(242,233,'Đèn Ngủ',2),(243,233,'Đèn Pin',2),(244,233,'Pin & Dụng Cụ Sạc Pin',2),(245,234,'Ly, Cốc, Bình Nước',2),(246,234,'Hộp Đựng Đồ Cá Nhân',2),(247,234,'Trang Trí Nhà Cửa',2),(248,234,'Sửa Chữa Nhà Cửa',2),(249,235,'Móc Khóa',2),(250,235,'Gương - Lược',2),(251,235,'Khung Hình',2),(252,235,'Tượng',2),(253,236,'Thực Phẩm',2),(254,236,'Thiết Bị Số - Phụ Kiện Số',2),(255,236,'Quạt Các Loại',2);
-/*!40000 ALTER TABLE `categoryproduct` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `discount`
 --
 
@@ -187,34 +161,6 @@ INSERT INTO `item` VALUES (1,'1880000187661-mau3','Trung Quốc','OEM','	Trung Q
 UNLOCK TABLES;
 
 --
--- Table structure for table `order`
---
-
-DROP TABLE IF EXISTS `order`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order` (
-  `IDOrder` int NOT NULL AUTO_INCREMENT,
-  `IDUser` int DEFAULT NULL,
-  `IDProduct` varchar(100) DEFAULT NULL,
-  `OrderDate` varchar(45) DEFAULT NULL,
-  `Quantity` int DEFAULT NULL,
-  `Status` varchar(25) DEFAULT NULL,
-  PRIMARY KEY (`IDOrder`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `order`
---
-
-LOCK TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,1,'6934274178186-mau1','1640419499317',3,'đang xử lý'),(2,1,'8935278602606','1640419499319',1,'đang xử lý');
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `otp`
 --
 
@@ -282,6 +228,32 @@ INSERT INTO `product` VALUES ('1116090011532',1,54,'Book','Nhật Ký Chú Bé N
 UNLOCK TABLES;
 
 --
+-- Table structure for table `product_category`
+--
+
+DROP TABLE IF EXISTS `product_category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_category` (
+  `IDCategory` int NOT NULL AUTO_INCREMENT,
+  `IDParent` int DEFAULT NULL,
+  `Name` varchar(200) DEFAULT NULL,
+  `Level` int DEFAULT NULL,
+  PRIMARY KEY (`IDCategory`)
+) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_category`
+--
+
+LOCK TABLES `product_category` WRITE;
+/*!40000 ALTER TABLE `product_category` DISABLE KEYS */;
+INSERT INTO `product_category` VALUES (1,0,'Sách Trong Nước',0),(2,0,'FOREIGN BOOKS',0),(3,0,'VPP - Dụng Cụ Học Sinh',0),(4,0,'Đồ Chơi',0),(5,0,'Làm Đẹp - Sức Khỏe',0),(6,0,'Hành Trang Đến Trường',0),(7,0,'VPP - DCHS Theo Thương Hiệu',0),(8,0,'Đồ Chơi Theo Thương Hiệu',0),(9,0,'Bách Hóa Online - Lưu Niệm',0),(10,1,'Văn Học',1),(11,1,'Kinh Tế',1),(12,1,'Tâm Lý - Kỹ Năng Sống',1),(13,1,'Nuôi Dạy con',1),(14,1,'Sách Thiếu Nhi',1),(15,1,'Tiểu Sử - Hồi Ký',1),(16,1,'Giáo Khoa - Tham Khảo',1),(17,1,'Sách Học Ngoại Ngữ',1),(18,2,'Fiction',1),(19,2,'Business & Management',1),(20,2,'Personal Development',1),(21,2,'Children\'s Books',1),(22,2,'Dictionaries & Languages',1),(23,2,'Other Languages',1),(24,2,'Other Categories',1),(25,3,'Bút - Viết',1),(26,3,'Dụng Cụ Học Sinh',1),(27,3,'Dụng Cụ Văn Phòng',1),(28,3,'Dụng Cụ Vẽ',1),(29,3,'Sản Phẩm Về Giấy',1),(30,3,'Sản Phẩm Khác',1),(31,3,'Sản Phẩm Điện Tử',1),(32,3,'Sản Phẩm Mới',1),(33,10,'Tiểu Thuyết',2),(34,10,'Truyện Ngắn - Tản Văn',2),(35,10,'Light Novel',2),(36,10,'Ngôn Tình',2),(37,10,'Trinh Thám',2),(38,10,'Truyện Ma',2),(39,11,'Nhân Vật - Bài Học Kinh Doanh',2),(40,11,'Quản Trị - Lãnh Đạo',2),(41,11,'Marketing - Bán Hàng',2),(42,11,'Phân Tích Kinh Tế',2),(43,12,'Kỹ Năng Sống',2),(44,12,'Rèn Luyện Nhân Cách',2),(45,12,'Tâm Lý',2),(46,12,'Sách Cho Tuổi Mới Lớn',2),(47,11,'Tài Chính - Ngân Hàng',2),(48,12,'Chicken Soup - Hạt Giống Tâm Hồn',2),(49,13,'Cẩm Nang Làm Cha Mẹ',2),(50,13,'Phương Pháp Giáo Dục Trẻ Các Nước',2),(51,13,'Phát Triển Trí Tuệ Cho Trẻ',2),(52,13,'Phát Triển Kỹ Năng Cho Trẻ',2),(53,13,'Giáo Dục Trẻ Tuổi Teen',2),(54,14,'Manga - Comic',2),(55,14,'Kiến Thức Bách Khoa',2),(56,14,'Sách Tranh Kỹ Năng Sống Cho Trẻ',2),(57,14,'Vừa Học - Vừa Học Vừa Chơi Với Trẻ',2),(58,14,'Từ Điển Thiếu Nhi',2),(59,15,'Câu Chuyện Cuộc Đời',2),(60,15,'Chính Trị',2),(61,15,'Kinh Tế',2),(62,15,'Nghệ Thuật - Giải Trí',2),(63,15,'Thể Thao',2),(64,16,'Sách Giáo Khoa',2),(65,16,'Sách Tham Khảo',2),(66,16,'Luyện thi ĐH, CĐ',2),(67,16,'Mẫu Giáo',2),(68,16,'Đại Học',2),(69,17,'Tiếng Anh',2),(70,17,'Tiếng Nhật',2),(71,17,'Tiếng Hoa',2),(72,17,'Tiếng Hàn',2),(73,17,'Tiếng Pháp',2),(74,5,'Làm Đẹp - Sức Khỏe',1),(75,74,'Khẩu Trang',2),(76,74,'Các Loại Nước Rửa Tay - Xà Phòng',2),(77,74,'Băng Keo Cá Nhân',2),(78,74,'Khăn Giấy - Giấy Ướt',2),(79,74,'Chăm Sóc Cá Nhân Khác ',2),(80,74,'Sản Phẩm Làm Đẹp',2),(81,18,'Contemporary Fiction',2),(82,18,'Romance',2),(83,18,'Fantasy',2),(84,18,'Classics',2),(85,19,'Business & Management',2),(86,19,'Economics',2),(87,19,'Finance & Accounting',2),(88,20,'Popular Psychology',2),(89,20,'Advice On Careers & Achieving Success',2),(90,20,'Personal Finance',2),(91,21,'Picture & Activity Books',2),(92,21,'Fiction (For Kids & Teen)',2),(93,21,'Education',2),(94,21,'Non-Fiction',2),(95,22,'ELT: Learning Material & Coursework',2),(96,22,'ELT: English For Specific Purposes',2),(97,22,'Dictionaries',2),(98,23,'Japanese Books',2),(99,23,'German Books',2),(100,23,'French Books',2),(101,24,'Biography',2),(102,24,'Society & Social Sciences',2),(103,24,'Science & Geography',2),(104,24,'Food & Drink',2),(105,25,'Bút Bi - Ruột Bút Bi',2),(106,25,'Bút Gel - Bút Nước',2),(107,25,'Bút Mực - Bút Máy',2),(108,25,'Bút Dạ Quang',2),(109,25,'Bút Chì - Ruột Bút Chì',2),(110,26,'Gôm - Tẩy',2),(111,26,'Gọt Bút Chì',2),(112,26,'Thước',2),(113,26,'Bóp Viết - Hộp Bút',2),(114,26,'Bộ Dụng Cụ Học Tập',2),(115,27,'Bìa - File Hồ Sơ',2),(116,27,'Kẹp Giấy - Kẹp Bướm',2),(117,27,'Đồ Bấm Kim - Kim Bấm - Gỡ Kim',2),(118,27,'Cắm Bút - Bảng Tên',2),(119,28,'Bút Vẽ',2),(120,28,'Màu Vẽ',2),(121,28,'Khay - Cọ Vẽ',2),(122,28,'Tập Vẽ - Giấy Vẽ',2),(123,29,'Tập - Vở',2),(124,29,'Sổ Tay Các Loại',2),(125,29,'Giấy Photo',2),(126,29,'Giấy Note',2),(127,30,'Dao Rọc Giấy - Lưỡi Dao Rọc Giấy - Kéo',2),(128,30,'Băng Keo - Cắt Băng Keo',2),(129,30,'Bút Xóa Nước - Xóa Kéo',2),(130,30,'Hồ Dán',2),(131,31,'Máy Tính Điện Tử',2),(132,4,'Đồ Chơi Nổi Bật',1),(133,4,'Phương Tiện Các Loại',1),(134,4,'Mô Hình Các Loại',1),(135,4,'Đồ chơi theo phim',1),(136,4,'Đồ Chơi Khác',1),(137,132,'Xếp Hình - Lắp Ghép',2),(138,132,'Đồ Chơi Giáo Dục',2),(139,132,'Đồ Chơi Điều Khiển',2),(140,132,'Board Game',2),(141,133,'Ô Tô',2),(142,133,'Máy Bay',2),(143,133,'Tàu Hỏa',2),(144,133,'Tàu Thủy',2),(145,133,'Phương Tiện Khác',2),(146,134,'Mô Hình Giấy',2),(147,134,'Mô Hình Gỗ',2),(148,134,'Mô Hình Nhân Vật',2),(149,134,'Mô Hình Động Vật',2),(150,135,'My Little Pony',2),(151,135,'Paw Patrol',2),(152,135,'Super Wings',2),(153,135,'Chiến Thần Vô Cực - NADO',2),(154,136,'Bột Nặn - Cát Nặn',2),(155,136,'Búp Bê',2),(156,136,'Thú Bông',2),(157,136,'Hướng Nghiệp Nhập Vai',2),(158,6,'Sách Giáo Khoa',1),(159,6,'Sách Tham Khảo',1),(160,6,'Luyện Thi THPTQG - Lớp 12',1),(161,6,'Đồ Nghề Đến Trường',1),(162,158,'Lớp 1',2),(163,158,'Lớp 2',2),(164,158,'Lớp 3',2),(165,158,'Lớp 4',2),(166,158,'Lớp 5',2),(167,158,'Lớp 6',2),(168,158,'Lớp 7',2),(169,158,'Lớp 8',2),(170,158,'Lớp 9',2),(171,158,'Lớp 10',2),(172,158,'Lớp 11',2),(173,158,'Lớp 12',2),(174,159,'Mẫu Giáo',2),(175,159,'Lớp 1',2),(176,159,'Lớp 2',2),(177,159,'Lớp 3',2),(178,159,'Lớp 4',2),(179,159,'Lớp 5',2),(180,159,'Lớp 6',2),(181,159,'Lớp 7',2),(182,159,'Lớp 8',2),(183,159,'Lớp 9',2),(184,159,'Lớp 10',2),(185,159,'Lớp 11',2),(186,159,'Lớp 12',2),(187,160,'Luyện Thi Môn Toán',2),(188,160,'Luyện Thi Môn Ngữ Văn',2),(189,160,'Luyện Thi Môn Tiếng Anh',2),(190,160,'Luyện Thi Môn Vật Lý',2),(191,160,'Luyện Thi Môn Hóa Học',2),(192,160,'Luyện Thi Môn Sinh Học',2),(193,160,'Luyện Thi Môn Địa Lý',2),(194,160,'Luyện Thi Môn Lịch Sử',2),(195,161,'Cặp , Ba Lô',2),(196,161,'Máy Tính',2),(197,161,'Bút Các Loại',2),(198,161,'Bóp Viết - Hộp Bút',2),(199,161,'Tập Vở',2),(200,161,'Bao Tập - Bao Sách',2),(201,161,'Mực',2),(202,161,'Gôm - Tẩy',2),(203,161,'Gọt Bút Chì',2),(204,161,'Compa',2),(205,161,'Bảng Viết - Bông Lau Bảng',2),(206,161,'Phấn - Hộp Đựng Phấn',2),(207,7,'Thương hiệu',1),(208,207,'Thiên Long',2),(209,207,'Thương Hiệu Hàn Quốc - Morning Glory',2),(210,207,'Thương Hiệu Hàn Quốc - Kyobo',2),(211,207,'Thương Hiệu Nhật - Kinokuniya',2),(212,207,'Thương Hiệu Nhật - Artline',2),(213,207,'Thương Hiệu Nhật - Marvy',2),(214,207,'Thương Hiệu Tây Ban Nha - Milan',2),(215,207,'Thương Hiệu Tây Ban Nha - Apli',2),(216,207,'Thương Hiệu Anh Quốc - Helix',2),(217,207,'Thương Hiệu Đức - Faber-Castell',2),(218,207,'Thương Hiệu Đức - Stabilo',2),(219,207,'Thương Hiệu Pháp - Maped',2),(220,207,'Thương Hiệu Indonesia - Bantex',2),(221,8,'Đồ chơi',1),(222,221,'Lego',2),(223,221,'tiNiToy',2),(224,221,'Lắp Ráp DUKA',2),(225,221,'Lắp Ráp Sluban',2),(226,221,'Lắp Ráp LaQ',2),(227,221,'Mô Hình Gỗ DIY - Robotime',2),(228,221,'Đồ Chơi VBCare',2),(229,221,'Hot Wheels',2),(230,221,'Play-Doh',2),(231,221,'Barbie',2),(232,9,'Đồ dùng cá nhân',1),(233,9,'Đồ điện gia dụng',1),(234,9,'Nhà cửa đời sống',1),(235,9,'Lưu niệm',1),(236,9,'Sản phẩm khác',1),(237,232,'Túi - Ví Thời Trang',2),(238,232,'Đồng Hồ',2),(239,232,'Phụ Kiện Du Lịch',2),(240,232,'Phụ Kiện Tóc',2),(241,233,'Đèn Bàn',2),(242,233,'Đèn Ngủ',2),(243,233,'Đèn Pin',2),(244,233,'Pin & Dụng Cụ Sạc Pin',2),(245,234,'Ly, Cốc, Bình Nước',2),(246,234,'Hộp Đựng Đồ Cá Nhân',2),(247,234,'Trang Trí Nhà Cửa',2),(248,234,'Sửa Chữa Nhà Cửa',2),(249,235,'Móc Khóa',2),(250,235,'Gương - Lược',2),(251,235,'Khung Hình',2),(252,235,'Tượng',2),(253,236,'Thực Phẩm',2),(254,236,'Thiết Bị Số - Phụ Kiện Số',2),(255,236,'Quạt Các Loại',2);
+/*!40000 ALTER TABLE `product_category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `product_image`
 --
 
@@ -305,6 +277,36 @@ LOCK TABLES `product_image` WRITE;
 /*!40000 ALTER TABLE `product_image` DISABLE KEYS */;
 INSERT INTO `product_image` VALUES (1,'1640247218521ocz','products/bzg3hfmcpfo4eahv7ecp',1),(2,'1640247218521ocz','products/nsx5qd3sllohp0uwylku',2),(3,'1640247218521ocz','products/yzcxnliu7kb9xcuytl7r',3);
 /*!40000 ALTER TABLE `product_image` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `product_order`
+--
+
+DROP TABLE IF EXISTS `product_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `product_order` (
+  `IDOrder` int NOT NULL AUTO_INCREMENT,
+  `IDUser` int NOT NULL,
+  `IDProduct` varchar(100) NOT NULL,
+  `OrderDate` varchar(45) NOT NULL,
+  `Quantity` int NOT NULL,
+  `Status` varchar(25) NOT NULL,
+  `Address` varchar(100) NOT NULL,
+  `Price` int NOT NULL,
+  PRIMARY KEY (`IDOrder`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `product_order`
+--
+
+LOCK TABLES `product_order` WRITE;
+/*!40000 ALTER TABLE `product_order` DISABLE KEYS */;
+INSERT INTO `product_order` VALUES (1,15,'6934274178186-mau1','1640419499317',3,'Đang xử lý','',0),(2,15,'8935278602606','1640419499319',1,'Đang xử lý','',0);
+/*!40000 ALTER TABLE `product_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -445,7 +447,7 @@ CREATE TABLE `user_address` (
   `CodeDistrict` int NOT NULL,
   `CodeWard` int NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -454,7 +456,7 @@ CREATE TABLE `user_address` (
 
 LOCK TABLES `user_address` WRITE;
 /*!40000 ALTER TABLE `user_address` DISABLE KEYS */;
-INSERT INTO `user_address` VALUES (11,15,'Nguyễn Hà Anh Kiểm','Kiểm ','0886456789','KTX khu B',1,0,'Tỉnh Bình Dương','Thành phố Dĩ An','Phường Đông Hòa',74,724,25957),(12,15,'Nguyễn Hà Anh Kiểm','Kiểm ','0886456789','KTX khu A',1,0,'Tỉnh Bình Dương','Thành phố Dĩ An','Phường Đông Hòa',74,724,25957);
+INSERT INTO `user_address` VALUES (11,15,'Nguyễn Hà Anh Kiểm','Kiểm ','0886456789','KTX khu B',1,0,'Tỉnh Bình Dương','Thành phố Dĩ An','Phường Đông Hòa',74,724,25957),(12,15,'Nguyễn Hà Anh Kiểm','Kiểm ','0886456789','KTX khu A',1,0,'Tỉnh Bình Dương','Thành phố Dĩ An','Phường Đông Hòa',74,724,25957),(15,15,'ssasas','Kiểm','0886703293','số 20',0,0,'Thành phố Hải Phòng','Huyện Vĩnh Bảo','Xã Vinh Quang',31,316,11872);
 /*!40000 ALTER TABLE `user_address` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -467,4 +469,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-25  0:40:11
+-- Dump completed on 2021-12-27 17:17:55
