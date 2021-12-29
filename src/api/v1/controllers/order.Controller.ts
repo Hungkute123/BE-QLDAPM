@@ -1,18 +1,11 @@
 // dependencies
 import { Request, Response } from 'express';
-import path from 'path';
-import multer from 'multer';
-
 // Interfaces
-
 // Middlewares
 import { asyncMiddleware } from '../middlewares/async.Middleware';
-import { search } from '../routes/routersApi/category.Router';
 // services
-import { orderService } from '../services/order.Services';
-import cloudinary from '../../../start/cloudinaryConfig';
-import { reduceEachLeadingCommentRange } from 'typescript';
-const generator = require('generate-password');
+import { orderService } from '../services/order.Service';
+
 class OrderController {
 	//-----------------------------------GET----------------------------------
 	getAllOrder = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
@@ -20,6 +13,15 @@ class OrderController {
 		const Path = process.env.PATH_API;
 		res.status(status).send({ data, message, Path });
 		//res.send("day la controller cua order");
+	});
+
+	getOrderByIDUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const IDUser = Number(query.IDUser);
+
+		const { data, message, status } = await orderService.getOrderByIDUser(IDUser);
+
+		res.status(status).json({ data, message });
 	});
 
 	addNewOrder = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
@@ -40,13 +42,6 @@ class OrderController {
 		} else {
 			res.status(status).send({ data: false, message });
 		}
-	});
-	getOrderByIDUser = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const query = req.query;
-		const IDUser = Number(query.IDUser);
-		const { data, message, status } = await orderService.getOrderByIDUser(IDUser);
-
-		res.status(status).send({ data, message });
 	});
 	getOrderOfSeller = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const query = req.query;

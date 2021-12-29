@@ -3,7 +3,7 @@ class OrderService {
 	getAll = async () => {
 		try {
 			const order = await orderModel.all();
-			
+
 			if (order === null) {
 				return {
 					data: null,
@@ -18,11 +18,11 @@ class OrderService {
 			};
 		} catch (error: any) {
 			console.log(error);
-			
+
 			throw new Error(error.messages);
 		}
 	};
-	
+
 	addNewOrder = async (Order: any) => {
 		try {
 			await orderModel.addNewOrder(Order);
