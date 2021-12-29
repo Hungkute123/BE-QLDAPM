@@ -33,6 +33,7 @@ productsRouter.post('/block-product', productsController.blockProduct);
 
 //--------------------------------------------PATCH------------------------------------------
 productsRouter.patch('/patch-product', productsController.patchProduct);
+productsRouter.patch('/update-sold-product', productsController.updateSoldProduct);
 
 //--------------------------------------------PUT------------------------------------------
 
