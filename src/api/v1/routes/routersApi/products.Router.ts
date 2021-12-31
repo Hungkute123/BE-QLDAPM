@@ -25,7 +25,7 @@ productsRouter.get('/count-search', productsController.countSearchProduct);
 productsRouter.get('/trend', productsController.productTrends);
 productsRouter.get('/rank', productsController.productRanking);
 productsRouter.get('/favorite-list', productsController.favoriteList);
-productsRouter.get('/iduser',authenticateSellerMiddleware, productsController.getProductsByIDUser);
+productsRouter.get('/iduser', productsController.getProductsByIDUser);
 
 //--------------------------------------------POST-----------------------------------------
 productsRouter.post('/add-new-product',authenticateSellerMiddleware, productsController.addNewProduct);

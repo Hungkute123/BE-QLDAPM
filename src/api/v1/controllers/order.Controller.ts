@@ -28,8 +28,8 @@ class OrderController {
 		const query = req.query;
 		const IDUser = Number(query.IDUser);
 		const { data, message, status } = await orderService.getOrderOfSeller(IDUser);
-
-		res.status(status).send({ data, message });
+		const Path = process.env.PATH_API;
+		res.status(status).send({ data, message,Path });
 	});
 
 	getOrderByIDOrder = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
