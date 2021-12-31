@@ -51,7 +51,6 @@ class OrderController {
 			Address: req.body.address,
 			Price: req.body.price,
 		};
-		console.log(order);
 
 		const { data, message, status } = await orderService.addNewOrder(order);
 		if (data === true) {

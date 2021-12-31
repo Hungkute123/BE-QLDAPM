@@ -288,8 +288,6 @@ class ProductsController {
 				TypeProduct: req.body.type_product,
 				NameProduct: req.body.product_name,
 				Image: Image,
-				City: req.body.city,
-				District: req.body.district,
 				Price: req.body.product_price,
 				Weight: req.body.product_weight,
 				PackagingSize: req.body.product_package_size,
@@ -455,6 +453,12 @@ class ProductsController {
 	blockProduct = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const { IDProduct, statusProduct } = req.body;
 		const { data, message, status } = await productService.blockProduct(IDProduct, statusProduct);
+		const Path = process.env.PATH_API;
+		res.status(status).send({ data, message, Path });
+	});
+	updateSoldProduct = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const { IDProduct, sold } = req.body;
+		const { data, message, status } = await productService.updateSoldProduct(IDProduct, sold);
 		const Path = process.env.PATH_API;
 		res.status(status).send({ data, message, Path });
 	});

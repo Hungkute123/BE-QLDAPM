@@ -17,7 +17,8 @@ orderRouter.get('/order-of-seller', orderController.getOrderOfSeller);
 orderRouter.get('/get-order-id', orderController.getOrderByIDOrder);
 
 //--------------------------------------------POST-----------------------------------------
-orderRouter.post('/add-new-order', authenTokenMiddleware, orderController.addNewOrder);
+//orderRouter.post('/add-new-order', authenTokenMiddleware, orderController.addNewOrder);
+orderRouter.post('/add-new-order', orderController.addNewOrder);
 
 //--------------------------------------------PATCH------------------------------------------
 //orderRouter.patch('/patch-product', orderController.patchProduct);
