@@ -14,6 +14,7 @@ import { orderController } from '../../controllers/order.Controller';
 orderRouter.get('/all', orderController.getAllOrder);
 orderRouter.get('/get-order', orderController.getOrderByIDUser);
 orderRouter.get('/order-of-seller', orderController.getOrderOfSeller);
+orderRouter.get('/get-order-id', orderController.getOrderByIDOrder);
 
 //--------------------------------------------POST-----------------------------------------
 //orderRouter.post('/add-new-order', authenTokenMiddleware, orderController.addNewOrder);

@@ -25,6 +25,17 @@ class OrderModel {
 		return rows;
 	}
 
+	async getOrderByIDOrder(IDOrder: number) {
+		const sql = `select * from ${TBL_ORDER} where IDOrder = ${IDOrder}`;
+		const rows = await database.load(sql);
+
+		if (rows.length === 0) {
+			return null;
+		}
+
+		return rows[0];
+	}
+
 	async addNewOrder(Order: any) {
 		return database.add(Order, TBL_ORDER);
 	}
@@ -38,10 +49,10 @@ class OrderModel {
 
 		return rows;
 	}
-	
-	updateStatus(status: string, IDOrder: number) {		
+
+	updateStatus(status: string, IDOrder: number) {
 		const entity = { Status: status };
-		const condition = { IDOrder: IDOrder  };
+		const condition = { IDOrder: IDOrder };
 
 		return database.patch(entity, condition, TBL_ORDER);
 	}
