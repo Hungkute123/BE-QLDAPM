@@ -24,6 +24,23 @@ class OrderController {
 		res.status(status).json({ data, message });
 	});
 
+	getOrderOfSeller = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const IDUser = Number(query.IDUser);
+		const { data, message, status } = await orderService.getOrderOfSeller(IDUser);
+
+		res.status(status).send({ data, message });
+	});
+
+	getOrderByIDOrder = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
+		const query = req.query;
+		const IDOrder = Number(query.IDOrder);
+
+		const { data, message, status } = await orderService.getOrderByIDOrder(IDOrder);
+
+		res.status(status).json({ data, message });
+	});
+
 	addNewOrder = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const order = {
 			IDUser: req.body.id_user,
@@ -32,7 +49,7 @@ class OrderController {
 			Quantity: req.body.quantity,
 			Status: req.body.status,
 			Address: req.body.address,
-			Price: req.body.price
+			Price: req.body.price,
 		};
 		console.log(order);
 
@@ -43,13 +60,7 @@ class OrderController {
 			res.status(status).send({ data: false, message });
 		}
 	});
-	getOrderOfSeller = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
-		const query = req.query;
-		const IDUser = Number(query.IDUser);
-		const { data, message, status } = await orderService.getOrderOfSeller(IDUser);
 
-		res.status(status).send({ data, message });
-	});
 	updateStatus = asyncMiddleware(async (req: Request, res: Response): Promise<void> => {
 		const { status, IDOrder } = req.body;
 

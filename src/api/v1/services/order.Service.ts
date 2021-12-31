@@ -73,10 +73,29 @@ class OrderService {
 			throw new Error(error.messages);
 		}
 	};
-	updateStatus = async (status: string, IDOrder: number) => {		
-		await orderModel.updateStatus(status, IDOrder)
+	getOrderByIDOrder = async (IDOrder: number) => {
+		try {
+			const order = await orderModel.getOrderByIDOrder(IDOrder);
+			if (order === null) {
+				return {
+					data: null,
+					message: 'can not find order',
+					status: 400,
+				};
+			}
+			return {
+				data: order,
+				message: 'Success',
+				status: 200,
+			};
+		} catch (error: any) {
+			throw new Error(error.messages);
+		}
+	};
+	updateStatus = async (status: string, IDOrder: number) => {
+		await orderModel.updateStatus(status, IDOrder);
 		return true;
-	}
+	};
 }
 
 export const orderService = new OrderService();
