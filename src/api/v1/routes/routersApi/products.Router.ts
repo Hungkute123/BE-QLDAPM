@@ -28,7 +28,7 @@ productsRouter.get('/favorite-list', productsController.favoriteList);
 productsRouter.get('/iduser', productsController.getProductsByIDUser);
 
 //--------------------------------------------POST-----------------------------------------
-productsRouter.post('/add-new-product',authenticateSellerMiddleware, productsController.addNewProduct);
+productsRouter.post('/add-new-product', productsController.addNewProduct);
 productsRouter.post('/block-product', productsController.blockProduct);
 
 //--------------------------------------------PATCH------------------------------------------
